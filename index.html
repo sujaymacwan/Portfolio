@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sujay Macwan | Data Portfolio</title>
+
+    <!-- Fonts & Icons -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
+    <!-- AOS (scroll animations) -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+
+    <link rel="stylesheet" href="assets/css/style.css" />
+  </head>
+  <body>
+    <!-- ───── NAV ───── -->
+    <nav class="nav">
+      <div class="logo">Sujay<span>.</span></div>
+      <ul>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <!-- ───── HERO ───── -->
+    <header class="hero" id="home">
+      <h1 data-aos="fade-up">Hey, I'm Sujay <span class="wave">👋</span></h1>
+      <p data-aos="fade-up" data-aos-delay="200">
+        I turn unruly data into delightful insights.<br />
+        Warning: contains bad puns and cool graphs.
+      </p>
+      <a href="#projects" class="btn" data-aos="zoom-in" data-aos-delay="400">
+        See The Magic <i class="fa-solid fa-wand-magic-sparkles"></i>
+      </a>
+    </header>
+
+    <!-- ───── PROJECT SECTION ───── -->
+    <section id="projects" class="section">
+      <h2 class="section-title" data-aos="fade-right">Projects</h2>
+
+      <!-- CATEGORY = Data Viz -->
+      <div class="category" data-aos="fade-up">
+        <h3>
+          <i class="fa-solid fa-chart-area"></i> Data Visualization &
+          Dashboarding
+        </h3>
+        <div class="card-grid">
+          <!-- CARD -->
+          <div class="card">
+            <div class="card-inner">
+              <!-- front -->
+              <div class="card-front">
+                <h4>US Police Shooting Viz</h4>
+                <p>Spotlighting 8-year trends.</p>
+                <span class="tag">Tableau • Python</span>
+              </div>
+              <!-- back -->
+              <div class="card-back">
+                <p>
+                  🔍 Racial disparities & morning-hour spikes. <br />
+                  🤕 Pun: “When the data shot up 🚀, we graphed it.”
+                </p>
+                <a
+                  href="https://github.com/sujaymacwan/US-Police-Shooting-Visualiszation"
+                  target="_blank"
+                  >GitHub ↗</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /card-grid -->
+      </div>
+      <!-- /category -->
+
+      <!-- ==== COPY-PASTE & EDIT FOR OTHER CATEGORIES ==== -->
+      <!-- Accessibility & Automation -->
+      <div class="category" data-aos="fade-up">
+        <h3><i class="fa-solid fa-robot"></i> Accessibility & Automation</h3>
+        <div class="card-grid">
+          <!-- Text-to-Audio -->
+          <div class="card">
+            <div class="card-inner">
+              <div class="card-front">
+                <h4>Text-to-Audio PDF</h4>
+                <p>PDFs that talk back 🔊</p>
+                <span class="tag">gTTS • PyPDF2</span>
+              </div>
+              <div class="card-back">
+                <p>
+                  🎧 Converts docs → WAV. <br />
+                  Joke: “Now even your files can read themselves bedtime
+                  stories.”
+                </p>
+                <a
+                  href="https://github.com/sujaymacwan/Audio-Video/blob/main/Text%20to%20Audio/AudioBook.ipynb"
+                  target="_blank"
+                  >GitHub ↗</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- YelpHarvest -->
+          <div class="card">
+            <div class="card-inner">
+              <div class="card-front">
+                <h4>YelpHarvest Scraper</h4>
+                <p>Reviews served raw 🍣</p>
+                <span class="tag">BeautifulSoup</span>
+              </div>
+              <div class="card-back">
+                <p>
+                  🍜 50+ cleansed reviews/restaurant. <br />
+                  Joke: “We crawl so you can binge-eat data.”
+                </p>
+                <a
+                  href="https://github.com/sujaymacwan/Web-Scrapping/blob/main/Yelp%20Reviews/Yelp%20Reviews.py"
+                  target="_blank"
+                  >GitHub ↗</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- (Continue adding categories & cards for the remaining projects.
+          Use the info/puns you supplied. The markup pattern above repeats.) -->
+    </section>
+
+    <!-- ───── ABOUT ───── -->
+    <section id="about" class="section alt">
+      <h2 class="section-title" data-aos="fade-right">About Me</h2>
+      <p data-aos="fade-up">
+        Data-scientist, ML tinkerer, and part-time stand-up (mostly when my
+        models fall over). I wrangle Python, SQL, Spark, Tableau and the
+        occasional espresso machine.
+      </p>
+    </section>
+
+    <!-- ───── CONTACT ───── -->
+    <section id="contact" class="section">
+      <h2 class="section-title" data-aos="fade-right">Get in Touch</h2>
+      <p data-aos="fade-up">
+        Email:
+        <a href="mailto:sujay@example.com">sujay@example.com</a> &nbsp;·&nbsp;
+        <a href="https://github.com/sujaymacwan" target="_blank"
+          ><i class="fa-brands fa-github"></i> GitHub</a
+        >
+      </p>
+    </section>
+
+    <!-- ───── FOOTER ───── -->
+    <footer>
+      <p>
+        © <span id="year"></span> Sujay Macwan · brewed with ☕ &amp; bad puns.
+      </p>
+    </footer>
+
+    <!-- scripts -->
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>
