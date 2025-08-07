@@ -1,3 +1,4 @@
+/* ─── Colour palette & globals ───────────────── */
 :root {
   --bg: #fafafa;
   --card: #ffffff;
@@ -7,16 +8,16 @@
 }
 
 * {
-  box-sizing: border-box;
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 body {
   font-family: "Poppins", sans-serif;
   background: var(--bg);
   color: var(--text);
   scroll-behavior: smooth;
-  line-height: 1.6;
+  line-height: 1.65;
 }
 
 a {
@@ -24,9 +25,10 @@ a {
   text-decoration: none;
 }
 a:hover {
-  opacity: 0.8;
+  opacity: 0.85;
 }
 
+/* ─── Navigation bar ─────────────────────────── */
 .nav {
   display: flex;
   justify-content: space-between;
@@ -35,7 +37,7 @@ a:hover {
   background: var(--card);
   position: sticky;
   top: 0;
-  z-index: 99;
+  z-index: 100;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 .logo {
@@ -45,14 +47,14 @@ a:hover {
 .logo span {
   color: var(--accent);
 }
-
 .nav ul {
   display: flex;
-  gap: 1.5rem;
+  gap: 1.6rem;
   list-style: none;
   font-size: 0.95rem;
 }
 
+/* ─── Hero section ───────────────────────────── */
 .hero {
   min-height: 70vh;
   display: flex;
@@ -61,9 +63,11 @@ a:hover {
   align-items: center;
   text-align: center;
   padding: 0 1rem;
+  position: relative;
+  overflow: hidden;
 }
 .hero h1 {
-  font-size: 2.5rem;
+  font-size: 2.6rem;
   font-weight: 600;
 }
 .wave {
@@ -78,10 +82,9 @@ a:hover {
     transform: rotate(12deg);
   }
 }
-
 .btn {
-  margin-top: 1.5rem;
-  padding: 0.8rem 1.6rem;
+  margin-top: 1.6rem;
+  padding: 0.85rem 1.7rem;
   background: var(--accent);
   color: #fff;
   border-radius: 4px;
@@ -92,6 +95,18 @@ a:hover {
   box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
 }
 
+/* animated SVG blob */
+.blob {
+  position: absolute;
+  top: -80px;
+  right: -120px;
+  width: 280px;
+  height: 280px;
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+/* ─── Generic section styling ────────────────── */
 .section {
   padding: 4rem 2rem;
 }
@@ -100,7 +115,7 @@ a:hover {
 }
 .section-title {
   font-size: 1.9rem;
-  margin-bottom: 2rem;
+  margin-bottom: 2.2rem;
   position: relative;
 }
 .section-title::after {
@@ -109,72 +124,131 @@ a:hover {
   height: 3px;
   background: var(--accent);
   position: absolute;
-  bottom: -8px;
   left: 0;
+  bottom: -8px;
   border-radius: 50px;
 }
 
+/* ─── Category block ─────────────────────────── */
 .category {
-  margin-bottom: 3rem;
+  margin-bottom: 3.5rem;
 }
 .category h3 {
-  margin-bottom: 1rem;
+  margin-bottom: 1.2rem;
   font-weight: 500;
   font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
+/* ─── Card grid ──────────────────────────────── */
 .card-grid {
   display: grid;
-  gap: 1.5rem;
+  gap: 1.6rem;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 }
 
+/* ─── Card component ─────────────────────────── */
 .card {
-  perspective: 1000px;
-  height: 260px;
-}
-.card-inner {
   position: relative;
-  width: 100%;
-  height: 100%;
-  transition: transform 0.6s;
-  transform-style: preserve-3d;
-}
-.card:hover .card-inner {
-  transform: rotateY(180deg);
-}
-.card-front,
-.card-back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  padding: 1.2rem;
   background: var(--card);
   border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
-  backface-visibility: hidden;
+  padding: 1.25rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  transition: transform 0.3s, box-shadow 0.3s;
+  min-height: 320px; /* ensures text fits on small screens */
+  overflow: hidden;
+}
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* front content */
+.card-content h4 {
+  margin-bottom: 0.55rem;
+  font-size: 1.07rem;
+}
+.card-content p {
+  font-size: 0.93rem;
+}
+.tag {
+  margin-top: 0.8rem;
+  display: inline-block;
+  font-size: 0.79rem;
+  color: var(--accent);
+}
+
+/* Overlay (slides up) */
+.overlay {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.94);
+  color: var(--text);
+  padding: 1.25rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  gap: 0.9rem;
+  transform: translateY(70%); /* default state - show top 30 % */
+  transition: transform 0.4s ease;
+  overflow-y: auto;
 }
-.card-front h4 {
-  margin-bottom: 0.6rem;
-  font-size: 1.05rem;
-}
-.tag {
-  margin-top: auto;
-  font-size: 0.8rem;
-  color: var(--accent);
-}
-.card-back {
-  transform: rotateY(180deg);
-  font-size: 0.9rem;
-  gap: 0.6rem;
+.card:hover .overlay {
+  transform: translateY(0);
 }
 
+/* scrollbar in overlay */
+.overlay::-webkit-scrollbar {
+  width: 6px;
+}
+.overlay::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 4px;
+}
+
+/* GitHub button */
+.gh-link {
+  align-self: flex-start;
+  margin-top: 1rem;
+  background: var(--accent);
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  display: inline-flex;
+  gap: 0.5rem;
+  transition: 0.25s;
+}
+.gh-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* ─── About / Contact / Footer ───────────────── */
 footer {
-  padding: 1.5rem;
+  padding: 1.6rem;
   text-align: center;
   font-size: 0.85rem;
   color: #666;
+}
+
+/* ─── Mobile tweaks ──────────────────────────── */
+@media (max-width: 500px) {
+  .hero h1 {
+    font-size: 2.1rem;
+  }
+  .card {
+    min-height: 360px;
+  }
+}
+/* touch devices: keep overlay open */
+@media (hover: none) {
+  .overlay {
+    transform: translateY(0);
+  }
 }

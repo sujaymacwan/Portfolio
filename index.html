@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sujay Macwan | Data Portfolio</title>
+    <title>Sujay Macwan | Data-Science Portfolio</title>
 
     <!-- Fonts & Icons -->
     <link
@@ -15,7 +15,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     />
 
-    <!-- AOS (scroll animations) -->
+    <!-- AOS -->
     <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
 
     <link rel="stylesheet" href="assets/css/style.css" />
@@ -32,119 +32,538 @@
     </nav>
 
     <!-- ───── HERO ───── -->
-    <header class="hero" id="home">
+    <header class="hero">
       <h1 data-aos="fade-up">Hey, I'm Sujay <span class="wave">👋</span></h1>
-      <p data-aos="fade-up" data-aos-delay="200">
-        I turn unruly data into delightful insights.<br />
-        Warning: contains bad puns and cool graphs.
+      <p data-aos="fade-up" data-aos-delay="150">
+        Full-stack data scientist. I turn unruly data into tidy punch-lines.
       </p>
-      <a href="#projects" class="btn" data-aos="zoom-in" data-aos-delay="400">
-        See The Magic <i class="fa-solid fa-wand-magic-sparkles"></i>
+      <a href="#projects" class="btn" data-aos="zoom-in" data-aos-delay="300">
+        Browse Portfolio <i class="fa-solid fa-arrow-down-long"></i>
       </a>
+
+      <!-- animated blob -->
+      <svg
+        class="blob"
+        viewBox="0 0 200 200"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path fill="#eef0ff">
+          <animate
+            attributeName="d"
+            dur="12s"
+            repeatCount="indefinite"
+            values="
+        M39.4,-69.7C50.2,-60.5,58,-50.2,66.4,-38.5C74.8,-26.7,83.9,-13.3,83.4,0.4C83,14.1,73,28.2,62.4,40.4C51.7,52.5,40.3,62.6,27,68.5C13.8,74.4,-1.4,76.2,-15.4,72.4C-29.5,68.5,-42.4,59,-53.4,47C-64.4,35.1,-73.6,20.7,-76.2,4.5C-78.7,-11.7,-74.7,-29.6,-65.9,-44.4C-57.1,-59.2,-43.6,-70.9,-28.4,-77.9C-13.3,-84.9,3.5,-87.3,18.9,-83C34.4,-78.6,48.5,-67.4,39.4,-69.7Z;
+        M28.5,-50.6C39.5,-43.6,50.4,-35.1,55.6,-23.5C60.8,-11.9,60.3,2.8,55.8,16.7C51.3,30.6,42.6,43.8,30.9,48.9C19.3,54,4.6,51,-8.9,49.4C-22.3,47.8,-34.6,47.6,-46.6,41.2C-58.6,34.8,-70.4,22.3,-72.8,8.8C-75.1,-4.6,-68,-20.2,-57,-33.1C-46.1,-46,-31.2,-56.2,-16.2,-57.2C-1.1,-58.1,13.9,-50.5,28.5,-50.6Z;
+        M39.4,-69.7C50.2,-60.5,58,-50.2,66.4,-38.5C74.8,-26.7,83.9,-13.3,83.4,0.4C83,14.1,73,28.2,62.4,40.4C51.7,52.5,40.3,62.6,27,68.5C13.8,74.4,-1.4,76.2,-15.4,72.4C-29.5,68.5,-42.4,59,-53.4,47C-64.4,35.1,-73.6,20.7,-76.2,4.5C-78.7,-11.7,-74.7,-29.6,-65.9,-44.4C-57.1,-59.2,-43.6,-70.9,-28.4,-77.9C-13.3,-84.9,3.5,-87.3,18.9,-83C34.4,-78.6,48.5,-67.4,39.4,-69.7Z"
+          />
+        </path>
+      </svg>
     </header>
 
-    <!-- ───── PROJECT SECTION ───── -->
+    <!-- ───── PROJECTS ───── -->
     <section id="projects" class="section">
       <h2 class="section-title" data-aos="fade-right">Projects</h2>
 
-      <!-- CATEGORY = Data Viz -->
+      <!-- 1 ─ Data Visualisation -->
       <div class="category" data-aos="fade-up">
         <h3>
           <i class="fa-solid fa-chart-area"></i> Data Visualization &
           Dashboarding
         </h3>
         <div class="card-grid">
-          <!-- CARD -->
+          <!-- P-1 -->
           <div class="card">
-            <div class="card-inner">
-              <!-- front -->
-              <div class="card-front">
-                <h4>US Police Shooting Viz</h4>
-                <p>Spotlighting 8-year trends.</p>
-                <span class="tag">Tableau • Python</span>
-              </div>
-              <!-- back -->
-              <div class="card-back">
-                <p>
-                  🔍 Racial disparities & morning-hour spikes. <br />
-                  🤕 Pun: “When the data shot up 🚀, we graphed it.”
-                </p>
-                <a
-                  href="https://github.com/sujaymacwan/US-Police-Shooting-Visualiszation"
-                  target="_blank"
-                  >GitHub ↗</a
-                >
-              </div>
+            <div class="card-content">
+              <h4>US Police Shooting Viz</h4>
+              <p>8-year Tableau dashboard.</p>
+              <span class="tag">Tableau • Python</span>
+            </div>
+            <div class="overlay">
+              <p>
+                2 500 + white-victim cases, 800 + morning incidents, 0.6 min
+                state gap.<br />
+                Pun – “When the data shot up 🚀, we graphed it.”
+              </p>
+              <a
+                class="gh-link"
+                href="https://github.com/sujaymacwan/US-Police-Shooting-Visualiszation"
+                target="_blank"
+              >
+                <i class="fa-brands fa-github"></i> GitHub
+              </a>
             </div>
           </div>
         </div>
-        <!-- /card-grid -->
       </div>
-      <!-- /category -->
 
-      <!-- ==== COPY-PASTE & EDIT FOR OTHER CATEGORIES ==== -->
-      <!-- Accessibility & Automation -->
+      <!-- 2 ─ Accessibility & Automation -->
       <div class="category" data-aos="fade-up">
-        <h3><i class="fa-solid fa-robot"></i> Accessibility & Automation</h3>
+        <h3>
+          <i class="fa-solid fa-robot"></i> Accessibility & Automation Tools
+        </h3>
         <div class="card-grid">
-          <!-- Text-to-Audio -->
+          <!-- P-2 -->
           <div class="card">
-            <div class="card-inner">
-              <div class="card-front">
-                <h4>Text-to-Audio PDF</h4>
-                <p>PDFs that talk back 🔊</p>
-                <span class="tag">gTTS • PyPDF2</span>
-              </div>
-              <div class="card-back">
-                <p>
-                  🎧 Converts docs → WAV. <br />
-                  Joke: “Now even your files can read themselves bedtime
-                  stories.”
-                </p>
-                <a
-                  href="https://github.com/sujaymacwan/Audio-Video/blob/main/Text%20to%20Audio/AudioBook.ipynb"
-                  target="_blank"
-                  >GitHub ↗</a
-                >
-              </div>
+            <div class="card-content">
+              <h4>Text-to-Audio PDF</h4>
+              <p>Let PDFs whisper 🔊</p>
+              <span class="tag">gTTS • PyPDF2</span>
+            </div>
+            <div class="overlay">
+              <p>
+                Multi-page docs → WAV for hands-free reading.<br />
+                Pun – “Now even your files can read themselves bedtime stories.”
+              </p>
+              <a
+                class="gh-link"
+                href="https://github.com/sujaymacwan/Audio-Video/blob/main/Text%20to%20Audio/AudioBook.ipynb"
+                target="_blank"
+              >
+                <i class="fa-brands fa-github"></i> GitHub
+              </a>
             </div>
           </div>
 
-          <!-- YelpHarvest -->
+          <!-- P-5 -->
           <div class="card">
-            <div class="card-inner">
-              <div class="card-front">
-                <h4>YelpHarvest Scraper</h4>
-                <p>Reviews served raw 🍣</p>
-                <span class="tag">BeautifulSoup</span>
-              </div>
-              <div class="card-back">
-                <p>
-                  🍜 50+ cleansed reviews/restaurant. <br />
-                  Joke: “We crawl so you can binge-eat data.”
-                </p>
-                <a
-                  href="https://github.com/sujaymacwan/Web-Scrapping/blob/main/Yelp%20Reviews/Yelp%20Reviews.py"
-                  target="_blank"
-                  >GitHub ↗</a
-                >
-              </div>
+            <div class="card-content">
+              <h4>YelpHarvest Scraper</h4>
+              <p>Reviews served raw 🍣</p>
+              <span class="tag">BeautifulSoup</span>
+            </div>
+            <div class="overlay">
+              <p>
+                50 + cleaned reviews/restaurant.<br />
+                Pun – “We crawl so you can binge-eat data.”
+              </p>
+              <a
+                class="gh-link"
+                href="https://github.com/sujaymacwan/Web-Scrapping/blob/main/Yelp%20Reviews/Yelp%20Reviews.py"
+                target="_blank"
+              >
+                <i class="fa-brands fa-github"></i> GitHub
+              </a>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- (Continue adding categories & cards for the remaining projects.
-          Use the info/puns you supplied. The markup pattern above repeats.) -->
+      <!-- 3 ─ Computer Vision -->
+      <div class="category" data-aos="fade-up">
+        <h3>
+          <i class="fa-solid fa-camera-cctv"></i> Computer Vision & Security
+        </h3>
+        <div class="card-grid">
+          <!-- P-3 -->
+          <div class="card">
+            <div class="card-content">
+              <h4>SmartGuard</h4>
+              <p>Real-time motion eye 👁️</p>
+              <span class="tag">OpenCV • NumPy</span>
+            </div>
+            <div class="overlay">
+              <p>
+                500-px threshold, 30 fps recording.<br />
+                Pun – “A watchdog without the barking.”
+              </p>
+              <a
+                class="gh-link"
+                href="https://github.com/sujaymacwan/Audio-Video/blob/main/Thief%20Detection/SujayMacwan_Thief_detection.ipynb"
+                target="_blank"
+              >
+                <i class="fa-brands fa-github"></i> GitHub
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 ─ ML & Risk Analytics -->
+      <div class="category" data-aos="fade-up">
+        <h3>
+          <i class="fa-solid fa-heart-pulse"></i> Machine Learning & Risk
+          Analytics
+        </h3>
+        <div class="card-grid">
+          <!-- P-4 -->
+          <div class="card">
+            <div class="card-content">
+              <h4>CardioPredict</h4>
+              <p>Heart-risk ML ❤️</p>
+              <span class="tag">sk-learn • XGBoost</span>
+            </div>
+            <div class="overlay">
+              <p>
+                44 model-imputer combos; 85.5 % accuracy.<br />
+                Pun – “Putting the ‘art’ in heart-smart charts.”
+              </p>
+              <a
+                class="gh-link"
+                href="https://github.com/sujaymacwan/Data-Analysis/tree/main/Heart%20diseases%20(Imputers)"
+                target="_blank"
+              >
+                <i class="fa-brands fa-github"></i> GitHub
+              </a>
+            </div>
+          </div>
+
+          <!-- P-8 -->
+          <div class="card">
+            <div class="card-content">
+              <h4>AutoFeatureSelector</h4>
+              <p>6 methods, 1 ranker</p>
+              <span class="tag">sk-learn • LGBM</span>
+            </div>
+            <div class="overlay">
+              <p>
+                Ranks top-30 FIFA-19 features.<br />
+                Pun – “Feature hoarder turned minimalist.”
+              </p>
+              <a
+                class="gh-link"
+                href="https://github.com/sujaymacwan/Machine-Learning/blob/main/Auto%20Feature%20Selector/AFS.ipynb"
+                target="_blank"
+              >
+                <i class="fa-brands fa-github"></i> GitHub
+              </a>
+            </div>
+          </div>
+
+          <!-- P-9 -->
+          <div class="card">
+            <div class="card-content">
+              <h4>Algo Comparison</h4>
+              <p>5 models + ensemble</p>
+              <span class="tag">sk-learn</span>
+            </div>
+            <div class="overlay">
+              <p>
+                Side-by-side metrics for customer class.<br />
+                Pun – “ML speed-dating for algorithms.”
+              </p>
+              <a
+                class="gh-link"
+                href="https://github.com/sujaymacwan/Machine-Learning/blob/main/Comparision%20of%20Algorithms/Accuracy%20and%20Report%20All%20algos.py"
+                target="_blank"
+              >
+                <i class="fa-brands fa-github"></i> GitHub
+              </a>
+            </div>
+          </div>
+
+          <!-- P-10 -->
+          <div class="card">
+            <div class="card-content">
+              <h4>Credit Card DT</h4>
+              <p>Approve or decline? 💳</p>
+              <span class="tag">DecisionTree</span>
+            </div>
+            <div class="overlay">
+              <p>
+                90 % accuracy after 47 engineered features.<br />
+                Pun – “Swipe right for approvals.”
+              </p>
+              <a
+                class="gh-link"
+                href="https://github.com/sujaymacwan/Machine-Learning/blob/main/Credit%20Card/DecisionTree.ipynb"
+                target="_blank"
+              >
+                <i class="fa-brands fa-github"></i> GitHub
+              </a>
+            </div>
+          </div>
+
+          <!-- P-11 -->
+          <div class="card">
+            <div class="card-content">
+              <h4>Credit Card RF</h4>
+              <p>Imbalance? No prob.</p>
+              <span class="tag">RandomForest</span>
+            </div>
+            <div class="overlay">
+              <p>
+                93 % accuracy (F1 0.57) with oversampling.<br />
+                Pun – “Leaves bias in the dust — literally.”
+              </p>
+              <a
+                class="gh-link"
+                href="https://github.com/sujaymacwan/Machine-Learning/blob/main/Credit%20Card/Random_Forest_Updated.ipynb"
+                target="_blank"
+              >
+                <i class="fa-brands fa-github"></i> GitHub
+              </a>
+            </div>
+          </div>
+
+          <!-- P-12 -->
+          <div class="card">
+            <div class="card-content">
+              <h4>Home Credit LGBM</h4>
+              <p>700 feats, 0.791 AUC</p>
+              <span class="tag">LightGBM</span>
+            </div>
+            <div class="overlay">
+              <p>
+                Multi-table engineering & 10-fold CV.<br />
+                Pun – “Because default shouldn’t be the default.”
+              </p>
+              <a
+                class="gh-link"
+                href="https://github.com/sujaymacwan/Machine-Learning/blob/main/Home%20Credit%20Default%20Risk/LGBM%20Credit%20Default.ipynb"
+                target="_blank"
+              >
+                <i class="fa-brands fa-github"></i> GitHub
+              </a>
+            </div>
+          </div>
+
+          <!-- P-13 -->
+          <div class="card">
+            <div class="card-content">
+              <h4>Loan Ensemble</h4>
+              <p>CatBoost + LGBM 🏦</p>
+              <span class="tag">Ensemble</span>
+            </div>
+            <div class="overlay">
+              <p>
+                0.958 AUC; LIME explanations.<br />
+                Pun – “No ‘loan-ly’ features left behind.”
+              </p>
+              <a
+                class="gh-link"
+                href="https://github.com/sujaymacwan/Machine-Learning/blob/main/Loan%20Approval%20Prediction/loan-approval-prediction.ipynb"
+                target="_blank"
+              >
+                <i class="fa-brands fa-github"></i> GitHub
+              </a>
+            </div>
+          </div>
+
+          <!-- P-16 -->
+          <div class="card">
+            <div class="card-content">
+              <h4>Real-Estate Price</h4>
+              <p>RF beats Lasso 🏘️</p>
+              <span class="tag">RandomForest</span>
+            </div>
+            <div class="overlay">
+              <p>
+                81 % R²; z-score outlier check.<br />
+                Pun – “Turning square footage into square numbers.”
+              </p>
+              <a
+                class="gh-link"
+                href="https://github.com/sujaymacwan/Machine-Learning/blob/main/Real%20Estate%20Price%20Prediction/Real%20Estate%20Price%20Prediction.ipynb"
+                target="_blank"
+              >
+                <i class="fa-brands fa-github"></i> GitHub
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5 ─ NLP & Recommenders -->
+      <div class="category" data-aos="fade-up">
+        <h3>
+          <i class="fa-solid fa-language"></i> NLP & Recommendation Systems
+        </h3>
+        <div class="card-grid">
+          <!-- P-6 -->
+          <div class="card">
+            <div class="card-content">
+              <h4>VisionNarrator</h4>
+              <p>CNN-LSTM captions 🖼️</p>
+              <span class="tag">DenseNet • LSTM</span>
+            </div>
+            <div class="overlay">
+              <p>
+                8 000 images → 40 k captions.<br />
+                Pun – “Pictures worth a thousand embeddings.”
+              </p>
+              <a
+                class="gh-link"
+                href="https://github.com/sujaymacwan/Deep-Learning/blob/main/Image-Captioning-using-CNN-LSTM-main/Image-Captioning-using-CNN-LSTM-main/Image_captioning.ipynb"
+                target="_blank"
+              >
+                <i class="fa-brands fa-github"></i> GitHub
+              </a>
+            </div>
+          </div>
+
+          <!-- P-7 -->
+          <div class="card">
+            <div class="card-content">
+              <h4>BERT Sentiment</h4>
+              <p>Twitter moods 🐤</p>
+              <span class="tag">BERT • PyTorch</span>
+            </div>
+            <div class="overlay">
+              <p>
+                Fine-tuned, F1-scored.<br />
+                Pun – “Why read tweets when BERT can feel them for you?”
+              </p>
+              <a
+                class="gh-link"
+                href="https://github.com/sujaymacwan/Deep-Learning/blob/main/Sentiment-Analysis-using-BERT-main/Sentiment_Analysis.ipynb"
+                target="_blank"
+              >
+                <i class="fa-brands fa-github"></i> GitHub
+              </a>
+            </div>
+          </div>
+
+          <!-- P-14 -->
+          <div class="card">
+            <div class="card-content">
+              <h4>Movie Recommender</h4>
+              <p>SVD 0.94 RMSE 🎬</p>
+              <span class="tag">Surprise • TF-IDF</span>
+            </div>
+            <div class="overlay">
+              <p>
+                Hybrid filtering for 943 users.<br />
+                Pun – “Because you deserve better than ‘Because you watched…’”
+              </p>
+              <a
+                class="gh-link"
+                href="https://github.com/sujaymacwan/Machine-Learning/blob/main/Movie%20Reccomendation/Movie_Recommender.ipynb"
+                target="_blank"
+              >
+                <i class="fa-brands fa-github"></i> GitHub
+              </a>
+            </div>
+          </div>
+
+          <!-- P-15 -->
+          <div class="card">
+            <div class="card-content">
+              <h4>LDA News Topics</h4>
+              <p>10 themes, 0.632 coh.</p>
+              <span class="tag">Gensim • spaCy</span>
+            </div>
+            <div class="overlay">
+              <p>
+                11 k articles visualised with pyLDAvis.<br />
+                Pun – “Letting the news make its own headlines.”
+              </p>
+              <a
+                class="gh-link"
+                href="https://github.com/sujaymacwan/Machine-Learning/blob/main/News%20Modeling/News_Modeling.ipynb"
+                target="_blank"
+              >
+                <i class="fa-brands fa-github"></i> GitHub
+              </a>
+            </div>
+          </div>
+
+          <!-- P-17 -->
+          <div class="card">
+            <div class="card-content">
+              <h4>Financial News Sentiment</h4>
+              <p>TF-IDF + SVM 💹</p>
+              <span class="tag">SVM • SMOTE</span>
+            </div>
+            <div class="overlay">
+              <p>
+                74 % accuracy, balanced classes.<br />
+                Pun – “Bulls, bears, and balanced classes.”
+              </p>
+              <a
+                class="gh-link"
+                href="https://github.com/sujaymacwan/Machine-Learning/blob/main/Sentimental%20Analysis%20on%20Financial%20News/Sujay_Macwan_Sentiment_Analysis.ipynb"
+                target="_blank"
+              >
+                <i class="fa-brands fa-github"></i> GitHub
+              </a>
+            </div>
+          </div>
+
+          <!-- P-18 -->
+          <div class="card">
+            <div class="card-content">
+              <h4>20 NG Text Class.</h4>
+              <p>93.9 % accuracy 📚</p>
+              <span class="tag">BoW • Word2Vec</span>
+            </div>
+            <div class="overlay">
+              <p>
+                LogReg + CountVectorizer wins.<br />
+                Pun – “Holy words per minute, Batman!”
+              </p>
+              <a
+                class="gh-link"
+                href="https://github.com/sujaymacwan/Machine-Learning/blob/main/Text%20Classification/Text_Classification.ipynb"
+                target="_blank"
+              >
+                <i class="fa-brands fa-github"></i> GitHub
+              </a>
+            </div>
+          </div>
+
+          <!-- P-19 -->
+          <div class="card">
+            <div class="card-content">
+              <h4>Text Summarizer</h4>
+              <p>6 algos vs long docs</p>
+              <span class="tag">TextRank • BART</span>
+            </div>
+            <div class="overlay">
+              <p>
+                Summa scores 0.620; auto BLEU checks.<br />
+                Pun – “TL;DR as-a-Service.”
+              </p>
+              <a
+                class="gh-link"
+                href="https://github.com/sujaymacwan/Machine-Learning/blob/main/Text%20Summarization/Text_Summarization.ipynb"
+                target="_blank"
+              >
+                <i class="fa-brands fa-github"></i> GitHub
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6 ─ Data Engineering -->
+      <div class="category" data-aos="fade-up">
+        <h3>
+          <i class="fa-solid fa-database"></i> Data Engineering & Big-Data
+          Pipelines
+        </h3>
+        <div class="card-grid">
+          <!-- P-20 -->
+          <div class="card">
+            <div class="card-content">
+              <h4>NYC Public-Data ETL</h4>
+              <p>8 sources, PySpark 🗽</p>
+              <span class="tag">PySpark • Power BI</span>
+            </div>
+            <div class="overlay">
+              <p>
+                Distributed processing, multi-DB integration.<br />
+                Pun – “If you can wrangle it here, you can wrangle it anywhere.”
+              </p>
+              <a
+                class="gh-link"
+                href="https://github.com/sujaymacwan/NYC-shooting-analysis"
+                target="_blank"
+              >
+                <i class="fa-brands fa-github"></i> GitHub
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- ───── ABOUT ───── -->
     <section id="about" class="section alt">
       <h2 class="section-title" data-aos="fade-right">About Me</h2>
       <p data-aos="fade-up">
-        Data-scientist, ML tinkerer, and part-time stand-up (mostly when my
-        models fall over). I wrangle Python, SQL, Spark, Tableau and the
-        occasional espresso machine.
+        Data-scientist, ML tinkerer, part-time pun-smith.<br />
+        Favourite optimisation: reducing coffee-to-insight latency.
       </p>
     </section>
 
@@ -152,18 +571,17 @@
     <section id="contact" class="section">
       <h2 class="section-title" data-aos="fade-right">Get in Touch</h2>
       <p data-aos="fade-up">
-        Email:
-        <a href="mailto:sujay@example.com">sujay@example.com</a> &nbsp;·&nbsp;
-        <a href="https://github.com/sujaymacwan" target="_blank"
-          ><i class="fa-brands fa-github"></i> GitHub</a
-        >
+        Email: <a href="mailto:sujay@example.com">sujay@example.com</a> ·
+        <a href="https://github.com/sujaymacwan" target="_blank">
+          <i class="fa-brands fa-github"></i> GitHub
+        </a>
       </p>
     </section>
 
     <!-- ───── FOOTER ───── -->
     <footer>
       <p>
-        © <span id="year"></span> Sujay Macwan · brewed with ☕ &amp; bad puns.
+        © <span id="year"></span> Sujay Macwan · brewed with ☕ &amp; dad-jokes.
       </p>
     </footer>
 
