@@ -31,24 +31,24 @@
       :root {
         --bg: #0b1320;
         --panel: rgba(255, 255, 255, 0.04);
-        --muted: #94a3b8;
+        --muted: #dadcdf;
         --accent: #7c83fd;
         --accent-2: #6ad3ff;
         --glass: rgba(255, 255, 255, 0.03);
         --card-border: rgba(255, 255, 255, 0.06);
-        --card-bg: rgba(255, 255, 255, 0.02);
+        --card-bg: rgb(255 255 255 / 13%);
         --shadow: 0 12px 30px rgba(2, 6, 23, 0.5);
         --radius: 12px;
         --focus: rgba(124, 131, 253, 0.2);
-        --headline-blue: #1e40af; /* Dark blue visible in both themes */
+        --headline-blue: #afc0f8; /* Dark blue visible in both themes */
         --text: #f1f5ff; /* slightly brighter for dark mode */
       }
 
       body.light {
         --bg: #f7f8fb;
         --panel: rgba(2, 6, 23, 0.02);
-        --muted: #475569;
-        --text: #f1f5ff; /* slightly brighter for dark mode */
+        --muted: #000000c2;
+        --text: #000000c2; /* slightly brighter for dark mode */
         --accent: #5b4bff;
         --accent-2: #0077cc;
         --glass: rgba(15, 23, 42, 0.03);
@@ -56,7 +56,7 @@
         --card-bg: #ffffff;
         --shadow: 0 10px 24px rgba(12, 34, 90, 0.06);
         --focus: rgba(91, 75, 255, 0.12);
-        --headline-blue: #1e40af; /* Same dark blue for light mode */
+        --headline-blue: #29314b; /* Same dark blue for light mode */
       }
 
       /* =========================
@@ -76,8 +76,8 @@
         background: linear-gradient(
           180deg,
           var(--bg) 0%,
-          var(--bg) 60%,
-          rgba(0, 0, 0, 0.02) 100%
+          var(--bg) 80%,
+          rgb(89 120 255 / 80%) 100%
         );
         background-repeat: no-repeat;
         background-attachment: fixed;
@@ -168,6 +168,7 @@
         display: inline-flex;
         gap: 8px;
         align-items: center;
+        text-decoration: none; /* Removes underline */
       }
       .toggle-btn {
         background: transparent;
@@ -426,6 +427,7 @@
       .btn.code {
         background: var(--accent);
         color: white;
+        text-decoration: none;
       }
 
       /* expandable details */
