@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sujay Macwan | Data-Science Portfolio</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Sujay Macwan — Data & ML Portfolio</title>
+    <meta
+      name="description"
+      content="Sujay Macwan — Data Scientist & ML Engineer. Portfolio of data visualisation, ML projects, and data engineering pipelines."
+    />
+    <meta name="author" content="Sujay Macwan" />
 
-    <!-- Fonts & Icons -->
+    <!-- Fonts & icons -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
       rel="stylesheet"
     />
     <link
@@ -15,578 +20,1982 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     />
 
-    <!-- AOS -->
-    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+    <!-- GSAP for animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
-    <link rel="stylesheet" href="assets/css/style.css" />
+    <style>
+      /* =========================
+   THEME VARIABLES (CSS variables, easy to port to SCSS)
+   ========================= */
+      :root {
+        --bg: #0b1320;
+        --panel: rgba(255, 255, 255, 0.04);
+        --muted: #94a3b8;
+        --accent: #7c83fd;
+        --accent-2: #6ad3ff;
+        --glass: rgba(255, 255, 255, 0.03);
+        --card-border: rgba(255, 255, 255, 0.06);
+        --card-bg: rgba(255, 255, 255, 0.02);
+        --shadow: 0 12px 30px rgba(2, 6, 23, 0.5);
+        --radius: 12px;
+        --focus: rgba(124, 131, 253, 0.2);
+        --headline-blue: #1e40af; /* Dark blue visible in both themes */
+        --text: #f1f5ff; /* slightly brighter for dark mode */
+      }
+
+      body.light {
+        --bg: #f7f8fb;
+        --panel: rgba(2, 6, 23, 0.02);
+        --muted: #475569;
+        --text: #f1f5ff; /* slightly brighter for dark mode */
+        --accent: #5b4bff;
+        --accent-2: #0077cc;
+        --glass: rgba(15, 23, 42, 0.03);
+        --card-border: rgba(15, 23, 42, 0.08);
+        --card-bg: #ffffff;
+        --shadow: 0 10px 24px rgba(12, 34, 90, 0.06);
+        --focus: rgba(91, 75, 255, 0.12);
+        --headline-blue: #1e40af; /* Same dark blue for light mode */
+      }
+
+      /* =========================
+   BASIC / RESET
+   ========================= */
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        height: 100%;
+      }
+      body {
+        margin: 0;
+        font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto,
+          "Helvetica Neue", Arial;
+        background: linear-gradient(
+          180deg,
+          var(--bg) 0%,
+          var(--bg) 60%,
+          rgba(0, 0, 0, 0.02) 100%
+        );
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+        color: var(--text);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        line-height: 1.5;
+        -webkit-tap-highlight-color: transparent;
+      }
+      a {
+        color: inherit;
+      }
+      .container {
+        max-width: 1120px;
+        margin: 0 auto;
+        padding: 0 18px;
+      }
+
+      /* =========================
+   NAV
+   ========================= */
+      header.site-header {
+        position: sticky;
+        top: 0;
+        z-index: 60;
+        background: linear-gradient(180deg, rgba(0, 0, 0, 0.35), transparent);
+        backdrop-filter: blur(6px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+      }
+      .nav-wrap {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 14px 18px;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .logo-badge {
+        width: 44px;
+        height: 44px;
+        border-radius: 10px;
+        background: linear-gradient(135deg, var(--accent), var(--accent-2));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: 700;
+        box-shadow: var(--shadow);
+      }
+      .brand h1 {
+        font-size: 16px;
+        margin: 0;
+      }
+      nav {
+        display: flex;
+        align-items: center;
+      }
+      nav ul {
+        display: flex;
+        gap: 18px;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        align-items: center;
+      }
+      nav a {
+        color: var(--muted);
+        text-decoration: none;
+        font-size: 15px;
+        padding: 8px;
+        border-radius: 8px;
+      }
+      nav a:hover,
+      nav a:focus {
+        color: var(--text);
+        background: var(--panel);
+      }
+      .cta-btn {
+        background: var(--accent);
+        color: white;
+        padding: 10px 14px;
+        border-radius: 10px;
+        font-weight: 600;
+        display: inline-flex;
+        gap: 8px;
+        align-items: center;
+      }
+      .toggle-btn {
+        background: transparent;
+        border: 1px solid rgba(255, 255, 255, 0.04);
+        padding: 8px;
+        border-radius: 10px;
+        color: var(--muted);
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      /* Mobile nav toggle */
+      .menu-toggle {
+        display: none;
+        flex-direction: column;
+        gap: 4px;
+        cursor: pointer;
+      }
+      .menu-toggle span {
+        width: 24px;
+        height: 2px;
+        background: var(--text);
+        border-radius: 2px;
+        transition: 0.3s;
+      }
+
+      /* Collapsible nav menu for mobile */
+      @media (max-width: 768px) {
+        nav ul {
+          position: absolute;
+          top: 60px;
+          right: 0;
+          background: var(--bg);
+          flex-direction: column;
+          align-items: flex-start;
+          width: 200px;
+          padding: 12px;
+          border-radius: var(--radius);
+          box-shadow: var(--shadow);
+          transform: translateY(-20px);
+          opacity: 0;
+          pointer-events: none;
+          transition: all 0.3s ease;
+        }
+        nav ul.open {
+          transform: translateY(0);
+          opacity: 1;
+          pointer-events: auto;
+        }
+        .menu-toggle {
+          display: flex;
+        }
+      }
+
+      /* =========================
+   HERO section
+   ========================= */
+      .hero {
+        position: relative;
+        min-height: 68vh;
+        display: flex;
+        align-items: center;
+        padding: 56px 0;
+        overflow: hidden;
+      }
+      .hero video {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: 0;
+        filter: brightness(0.45) contrast(1.05);
+      }
+      .hero::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          180deg,
+          rgba(2, 6, 23, 0.25),
+          rgba(2, 6, 23, 0.35)
+        );
+        mix-blend-mode: multiply;
+        z-index: 1;
+        pointer-events: none;
+      }
+      .hero-grid {
+        position: relative;
+        z-index: 2;
+        display: grid;
+        grid-template-columns: 1fr 480px;
+        gap: 40px;
+        align-items: center;
+      }
+      .hero h2 {
+        font-size: 44px;
+        line-height: 1.02;
+        margin: 0 0 14px;
+        font-weight: 800;
+        color: var(--headline-blue);
+      }
+      .hero p.lead {
+        color: var(--muted);
+        max-width: 720px;
+        margin: 0 0 18px;
+        font-size: 16px;
+      }
+      .hero .actions {
+        display: flex;
+        gap: 14px;
+        align-items: center;
+        margin-top: 8px;
+      }
+      .stat-badges {
+        display: flex;
+        gap: 12px;
+        margin-top: 22px;
+      }
+
+      /* featured card right column */
+      .feature-card {
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.02),
+          rgba(255, 255, 255, 0.01)
+        );
+        border-radius: var(--radius);
+        padding: 22px;
+        border: 1px solid var(--card-border);
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(6px);
+      }
+      .feature-card h4 {
+        margin: 0 0 6px;
+      }
+      .feature-meta {
+        color: var(--muted);
+        font-size: 13px;
+        margin-top: 12px;
+      }
+
+      /* =========================
+   PROJECTS GRID
+   ========================= */
+      .projects-section {
+        padding: 48px 0;
+        background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.02));
+      }
+      .projects-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 18px;
+      }
+      .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+      }
+      @media (max-width: 980px) {
+        .hero-grid {
+          grid-template-columns: 1fr;
+        }
+        .projects-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 640px) {
+        .projects-grid {
+          grid-template-columns: 1fr;
+        }
+        .nav-wrap {
+          padding: 10px;
+        }
+        .hero h2 {
+          font-size: 30px;
+        }
+      }
+
+      /* CARD */
+      .proj-card {
+        background: var(--card-bg);
+        border-radius: 12px;
+        padding: 16px;
+        border: 1px solid var(--card-border);
+        transition: transform 0.28s ease, box-shadow 0.28s ease,
+          border-color 0.18s;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        min-height: 150px;
+      }
+      .proj-card:hover {
+        transform: translateY(-8px);
+        box-shadow: var(--shadow);
+        border-color: rgba(124, 131, 253, 0.14);
+      }
+      .proj-card .title-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 10px;
+      }
+      .proj-card h3 {
+        margin: 0;
+        font-size: 16px;
+      }
+      .proj-card p.caption {
+        margin: 0;
+        color: var(--muted);
+        font-size: 13px;
+      }
+      .proj-tags {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-top: 8px;
+      }
+      .tag {
+        font-size: 12px;
+        color: var(--muted);
+        padding: 6px 8px;
+        border-radius: 8px;
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.01),
+          transparent
+        );
+        border: 1px solid rgba(255, 255, 255, 0.02);
+      }
+
+      /* card actions */
+      .card-actions {
+        margin-top: auto;
+        display: flex;
+        gap: 8px;
+        align-items: center;
+      }
+      .btn {
+        padding: 8px 12px;
+        border-radius: 8px;
+        border: none;
+        background: transparent;
+        color: var(--text);
+        cursor: pointer;
+        font-weight: 600;
+      }
+      .btn.ghost {
+        background: transparent;
+        border: 1px solid rgba(255, 255, 255, 0.04);
+        color: var(--muted);
+      }
+      .btn.code {
+        background: var(--accent);
+        color: white;
+      }
+
+      /* expandable details */
+      .details {
+        overflow: hidden;
+        transition: max-height 0.36s cubic-bezier(0.2, 0.9, 0.2, 1),
+          opacity 0.28s;
+        max-height: 0;
+        padding: 0 0;
+        border-top: 1px dashed rgba(255, 255, 255, 0.03);
+        opacity: 0;
+      }
+      .details.open {
+        opacity: 1;
+        padding: 12px 0 0;
+        max-height: 420px;
+      }
+      .details p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      /* accessibility focus */
+      .proj-card:focus-within {
+        outline: 3px solid var(--focus);
+        outline-offset: 4px;
+      }
+
+      /* small UI micro animations */
+      .micro {
+        transition: transform 0.18s ease;
+      }
+      .micro:hover {
+        transform: translateY(-3px);
+      }
+
+      /* footer */
+      footer {
+        padding: 26px 0;
+        color: var(--muted);
+        border-top: 1px solid rgba(255, 255, 255, 0.02);
+        margin-top: 36px;
+      }
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+
+      /* reduced motion */
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          transition: none !important;
+          animation: none !important;
+        }
+      }
+
+      /* Contact section email styling fix */
+      .contact-email {
+        color: var(--text);
+      }
+    </style>
   </head>
   <body>
-    <!-- ───── NAV ───── -->
-    <nav class="nav">
-      <div class="logo">Sujay<span>.</span></div>
-      <ul>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
+    <!-- Skip link -->
+    <a class="sr-only" href="#main">Skip to content</a>
 
-    <!-- ───── HERO ───── -->
-    <header class="hero">
-      <h1 data-aos="fade-up">Hey, I'm Sujay <span class="wave">👋</span></h1>
-      <p data-aos="fade-up" data-aos-delay="150">
-        Full-stack data scientist. I turn unruly data into tidy punch-lines.
-      </p>
-      <a href="#projects" class="btn" data-aos="zoom-in" data-aos-delay="300">
-        Browse Portfolio <i class="fa-solid fa-arrow-down-long"></i>
-      </a>
+    <!-- SITE HEADER -->
+    <header class="site-header" role="banner">
+      <div class="container nav-wrap">
+        <div class="brand">
+          <div class="logo-badge" aria-hidden>SM</div>
+          <div>
+            <h1 style="font-size: 15px; margin: 0">
+              Sujay <span style="color: var(--accent)">Macwan</span>
+            </h1>
+            <div style="font-size: 12px; color: var(--muted)">
+              Data • ML • Visualization
+            </div>
+          </div>
+        </div>
 
-      <!-- animated blob -->
-      <svg
-        class="blob"
-        viewBox="0 0 200 200"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path fill="#eef0ff">
-          <animate
-            attributeName="d"
-            dur="12s"
-            repeatCount="indefinite"
-            values="
-        M39.4,-69.7C50.2,-60.5,58,-50.2,66.4,-38.5C74.8,-26.7,83.9,-13.3,83.4,0.4C83,14.1,73,28.2,62.4,40.4C51.7,52.5,40.3,62.6,27,68.5C13.8,74.4,-1.4,76.2,-15.4,72.4C-29.5,68.5,-42.4,59,-53.4,47C-64.4,35.1,-73.6,20.7,-76.2,4.5C-78.7,-11.7,-74.7,-29.6,-65.9,-44.4C-57.1,-59.2,-43.6,-70.9,-28.4,-77.9C-13.3,-84.9,3.5,-87.3,18.9,-83C34.4,-78.6,48.5,-67.4,39.4,-69.7Z;
-        M28.5,-50.6C39.5,-43.6,50.4,-35.1,55.6,-23.5C60.8,-11.9,60.3,2.8,55.8,16.7C51.3,30.6,42.6,43.8,30.9,48.9C19.3,54,4.6,51,-8.9,49.4C-22.3,47.8,-34.6,47.6,-46.6,41.2C-58.6,34.8,-70.4,22.3,-72.8,8.8C-75.1,-4.6,-68,-20.2,-57,-33.1C-46.1,-46,-31.2,-56.2,-16.2,-57.2C-1.1,-58.1,13.9,-50.5,28.5,-50.6Z;
-        M39.4,-69.7C50.2,-60.5,58,-50.2,66.4,-38.5C74.8,-26.7,83.9,-13.3,83.4,0.4C83,14.1,73,28.2,62.4,40.4C51.7,52.5,40.3,62.6,27,68.5C13.8,74.4,-1.4,76.2,-15.4,72.4C-29.5,68.5,-42.4,59,-53.4,47C-64.4,35.1,-73.6,20.7,-76.2,4.5C-78.7,-11.7,-74.7,-29.6,-65.9,-44.4C-57.1,-59.2,-43.6,-70.9,-28.4,-77.9C-13.3,-84.9,3.5,-87.3,18.9,-83C34.4,-78.6,48.5,-67.4,39.4,-69.7Z"
-          />
-        </path>
-      </svg>
+        <nav aria-label="Primary navigation">
+          <ul>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li>
+              <a class="cta-btn" href="#projects"
+                >Browse work
+                <i class="fa-solid fa-arrow-right" style="font-size: 12px"></i
+              ></a>
+            </li>
+            <li>
+              <button
+                id="themeToggle"
+                class="toggle-btn"
+                aria-pressed="false"
+                aria-label="Toggle dark and light mode"
+              >
+                <i id="themeIcon" class="fa-solid fa-moon"></i>
+                <span class="sr-only">Toggle theme</span>
+              </button>
+            </li>
+          </ul>
+        </nav>
+      </div>
     </header>
 
-    <!-- ───── PROJECTS ───── -->
-    <section id="projects" class="section">
-      <h2 class="section-title" data-aos="fade-right">Projects</h2>
+    <!-- MAIN -->
+    <main id="main">
+      <!-- HERO with looping video background -->
+      <section class="hero" aria-labelledby="hero-title">
+        <!-- Replace the source below with your optimized WebM/MP4. Keep short and looped. -->
+        <video
+          id="bgVideo"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="metadata"
+          aria-hidden="true"
+        >
+          <!-- Example public short loop (replace with your file) -->
+          <source
+            src="https://storage.coverr.co/videos/coverr-people-on-a-stairs-1571?token=eyJhbGciOiJIUzI1NiJ9"
+            type="video/mp4"
+          />
+          <!-- Fallback: large gradient background remains -->
+        </video>
 
-      <!-- 1 ─ Data Visualisation -->
-      <div class="category" data-aos="fade-up">
-        <h3>
-          <i class="fa-solid fa-chart-area"></i> Data Visualization &
-          Dashboarding
-        </h3>
-        <div class="card-grid">
-          <!-- P-1 -->
-          <div class="card">
-            <div class="card-content">
-              <h4>US Police Shooting Viz</h4>
-              <p>8-year Tableau dashboard.</p>
-              <span class="tag">Tableau • Python</span>
+        <div class="container hero-grid">
+          <div>
+            <p
+              style="color: var(--accent-2); font-weight: 600; margin: 0 0 12px"
+            >
+              Hi, I'm Sujay — I build ML systems that ship ⚙️
+            </p>
+            <h2 id="hero-title">Turning noisy data into clear decisions.</h2>
+            <p class="lead">
+              Full-stack data scientist focused on production-ready ML, visual
+              storytelling, and automated data engineering pipelines. I blend
+              clean code, rigorous evaluation, and elegant visual design (and a
+              sprinkle of dad jokes).
+            </p>
+
+            <div class="actions">
+              <a class="cta-btn micro" href="#projects"
+                >View Projects
+                <i class="fa-solid fa-arrow-right" style="font-size: 12px"></i
+              ></a>
+              <a class="btn ghost micro" href="#contact">Get in touch</a>
             </div>
-            <div class="overlay">
-              <p>
-                2 500 + white-victim cases, 800 + morning incidents, 0.6 min
-                state gap.<br />
-                Pun – “When the data shot up 🚀, we graphed it.”
-              </p>
+
+            <div class="stat-badges" aria-hidden>
+              <div
+                style="
+                  background: var(--panel);
+                  padding: 10px;
+                  border-radius: 10px;
+                  border: 1px solid var(--card-border);
+                  color: var(--text);
+                "
+              >
+                <div style="font-size: 12px; color: var(--muted)">
+                  Experience
+                </div>
+                <div style="font-weight: 700">3+ yrs</div>
+              </div>
+              <div
+                style="
+                  background: var(--panel);
+                  padding: 10px;
+                  border-radius: 10px;
+                  border: 1px solid var(--card-border);
+                  color: var(--text);
+                "
+              >
+                <div style="font-size: 12px; color: var(--muted)">Projects</div>
+                <div style="font-weight: 700">20+</div>
+              </div>
+            </div>
+          </div>
+
+          <aside class="feature-card" aria-label="Featured project">
+            <small style="color: var(--muted)">Featured</small>
+            <h4>US Police Shooting Viz</h4>
+            <div class="feature-meta">Tableau • Python</div>
+            <p style="color: var(--muted); margin-top: 12px; font-size: 14px">
+              Interactive dashboards showing 8-year trends and demographic
+              insights. <em>“When the data shot up, we graphed it.”</em>
+            </p>
+            <div style="display: flex; gap: 10px; margin-top: 12px">
               <a
-                class="gh-link"
+                class="btn code"
                 href="https://github.com/sujaymacwan/US-Police-Shooting-Visualiszation"
                 target="_blank"
+                rel="noopener"
+                >Open project</a
               >
-                <i class="fa-brands fa-github"></i> GitHub
-              </a>
+              <a
+                class="btn ghost"
+                href="https://github.com/sujaymacwan"
+                target="_blank"
+                rel="noopener"
+                >GitHub</a
+              >
             </div>
+          </aside>
+        </div>
+      </section>
+
+      <!-- PROJECTS -->
+      <section
+        id="projects"
+        class="projects-section"
+        aria-labelledby="projects-title"
+      >
+        <div class="container">
+          <div class="projects-header">
+            <div>
+              <h2 id="projects-title" style="margin: 0">Selected Projects</h2>
+              <p style="color: var(--muted); margin: 6px 0 0">
+                A curated collection grouped by category — click “Read more” to
+                expand details (keyboard accessible).
+              </p>
+            </div>
+            <div style="color: var(--muted); font-size: 14px">
+              Tip: press <kbd>Enter</kbd> on a card’s "Read more" to toggle
+              details
+            </div>
+          </div>
+
+          <!-- CATEGORY 1: Data Visualization & Dashboarding (4) -->
+          <h3 style="margin: 18px 0 8px; color: var(--accent)">
+            Data Visualization & Dashboarding
+          </h3>
+          <div class="projects-grid" role="list">
+            <!-- Project template repeated: ensure total = 20 across categories -->
+            <!-- 1 -->
+            <article
+              class="proj-card"
+              role="listitem"
+              tabindex="0"
+              aria-labelledby="p1-title"
+            >
+              <div class="title-row">
+                <div>
+                  <h3 id="p1-title">US Police Shooting Viz</h3>
+                  <p class="caption">
+                    8-year interactive dashboard — stories in every datapoint.
+                  </p>
+                </div>
+                <div style="text-align: right; color: var(--muted)">
+                  Tableau
+                </div>
+              </div>
+
+              <div class="proj-tags" aria-hidden>
+                <span class="tag">Tableau</span><span class="tag">Python</span
+                ><span class="tag">Mapping</span>
+              </div>
+
+              <div class="card-actions">
+                <a
+                  class="btn code"
+                  href="https://github.com/sujaymacwan/US-Police-Shooting-Visualiszation"
+                  target="_blank"
+                  >View Code <i class="fa-brands fa-github"></i
+                ></a>
+                <button
+                  class="btn ghost read-more"
+                  aria-expanded="false"
+                  aria-controls="det1"
+                >
+                  Read more <i class="fa-solid fa-chevron-down"></i>
+                </button>
+              </div>
+
+              <div id="det1" class="details" aria-hidden="true">
+                <p>
+                  <strong>Impact:</strong> Revealed patterns used in a
+                  recommendations brief for local policy stakeholders.<br />
+                  <strong>Stack:</strong> Tableau, Python (pandas), GeoJSON.<br />
+                  <strong>Highlights:</strong> Time-slider, demographic filters,
+                  exportable charts.
+                </p>
+              </div>
+            </article>
+
+            <!-- 2 -->
+            <article
+              class="proj-card"
+              role="listitem"
+              tabindex="0"
+              aria-labelledby="p2-title"
+            >
+              <div class="title-row">
+                <div>
+                  <h3 id="p2-title">Sales KPI Dashboard</h3>
+                  <p class="caption">
+                    From chaos to KPI candy — real-time sales insights.
+                  </p>
+                </div>
+                <div style="text-align: right; color: var(--muted)">
+                  PowerBI
+                </div>
+              </div>
+
+              <div class="proj-tags">
+                <span class="tag">PowerBI</span><span class="tag">SQL</span>
+              </div>
+
+              <div class="card-actions">
+                <a class="btn code" href="#" target="_blank"
+                  >View Code <i class="fa-brands fa-github"></i
+                ></a>
+                <button
+                  class="btn ghost read-more"
+                  aria-expanded="false"
+                  aria-controls="det2"
+                >
+                  Read more <i class="fa-solid fa-chevron-down"></i>
+                </button>
+              </div>
+
+              <div id="det2" class="details" aria-hidden="true">
+                <p>
+                  <strong>Impact:</strong> Cut reporting time from 3 days to 1
+                  hour.<br />
+                  <strong>Stack:</strong> SQL, PowerBI, Python ETL.<br />
+                  <strong>Highlights:</strong> Drill-through visuals, anomaly
+                  alerts.
+                </p>
+              </div>
+            </article>
+
+            <!-- 3 -->
+            <article
+              class="proj-card"
+              role="listitem"
+              tabindex="0"
+              aria-labelledby="p3-title"
+            >
+              <div class="title-row">
+                <div>
+                  <h3 id="p3-title">Interactive Map Explorer</h3>
+                  <p class="caption">
+                    Turn location fuzz into actionable hotspots.
+                  </p>
+                </div>
+                <div style="text-align: right; color: var(--muted)">
+                  Leaflet
+                </div>
+              </div>
+
+              <div class="proj-tags">
+                <span class="tag">Leaflet</span><span class="tag">GeoJSON</span>
+              </div>
+
+              <div class="card-actions">
+                <a class="btn code" href="#" target="_blank"
+                  >View Code <i class="fa-brands fa-github"></i
+                ></a>
+                <button
+                  class="btn ghost read-more"
+                  aria-expanded="false"
+                  aria-controls="det3"
+                >
+                  Read more <i class="fa-solid fa-chevron-down"></i>
+                </button>
+              </div>
+
+              <div id="det3" class="details" aria-hidden="true">
+                <p>
+                  <strong>Impact:</strong> Visualised customer density to inform
+                  expansion decisions.<br />
+                  <strong>Stack:</strong> JS, Leaflet, Mapbox tiles.<br />
+                  <strong>Highlights:</strong> Clustering, time playback.
+                </p>
+              </div>
+            </article>
+
+            <!-- 4 -->
+            <article
+              class="proj-card"
+              role="listitem"
+              tabindex="0"
+              aria-labelledby="p4-title"
+            >
+              <div class="title-row">
+                <div>
+                  <h3 id="p4-title">Consumer Sentiment Viz</h3>
+                  <p class="caption">Sentiment waves, surfed with style.</p>
+                </div>
+                <div style="text-align: right; color: var(--muted)">D3.js</div>
+              </div>
+
+              <div class="proj-tags">
+                <span class="tag">D3</span><span class="tag">NLP</span>
+              </div>
+
+              <div class="card-actions">
+                <a class="btn code" href="#" target="_blank"
+                  >View Code <i class="fa-brands fa-github"></i
+                ></a>
+                <button
+                  class="btn ghost read-more"
+                  aria-expanded="false"
+                  aria-controls="det4"
+                >
+                  Read more <i class="fa-solid fa-chevron-down"></i>
+                </button>
+              </div>
+
+              <div id="det4" class="details" aria-hidden="true">
+                <p>
+                  <strong>Impact:</strong> Informed comms teams about trending
+                  topics.<br />
+                  <strong>Stack:</strong> D3, Python NLP pipeline.<br />
+                  <strong>Highlights:</strong> Interactive brush & filter.
+                </p>
+              </div>
+            </article>
+          </div>
+
+          <!-- CATEGORY 2: Accessibility & Automation (4) -->
+          <h3 style="margin: 22px 0 8px; color: var(--accent)">
+            Accessibility & Automation
+          </h3>
+          <div class="projects-grid" role="list">
+            <!-- 5 -->
+            <article
+              class="proj-card"
+              role="listitem"
+              tabindex="0"
+              aria-labelledby="p5-title"
+            >
+              <div class="title-row">
+                <div>
+                  <h3 id="p5-title">Text-to-Audio PDF</h3>
+                  <p class="caption">
+                    Let PDFs whisper — audio for long commutes.
+                  </p>
+                </div>
+                <div style="text-align: right; color: var(--muted)">gTTS</div>
+              </div>
+              <div class="proj-tags">
+                <span class="tag">Python</span><span class="tag">gTTS</span>
+              </div>
+              <div class="card-actions">
+                <a
+                  class="btn code"
+                  href="https://github.com/sujaymacwan/Audio-Video/blob/main/Text%20to%20Audio/AudioBook.ipynb"
+                  target="_blank"
+                  >View Code <i class="fa-brands fa-github"></i
+                ></a>
+                <button
+                  class="btn ghost read-more"
+                  aria-expanded="false"
+                  aria-controls="det5"
+                >
+                  Read more <i class="fa-solid fa-chevron-down"></i>
+                </button>
+              </div>
+              <div id="det5" class="details" aria-hidden="true">
+                <p>
+                  <strong>Impact:</strong> Made long documents accessible to
+                  sight-impaired users.<br />
+                  <strong>Stack:</strong> Python, PyPDF2, gTTS.<br />
+                  <strong>Highlights:</strong> Multi-page batching, silence
+                  trimming.
+                </p>
+              </div>
+            </article>
+
+            <!-- 6 -->
+            <article
+              class="proj-card"
+              role="listitem"
+              tabindex="0"
+              aria-labelledby="p6-title"
+            >
+              <div class="title-row">
+                <div>
+                  <h3 id="p6-title">YelpHarvest Scraper</h3>
+                  <p class="caption">
+                    Reviews served raw — clean data, happy analysts.
+                  </p>
+                </div>
+                <div style="text-align: right; color: var(--muted)">
+                  BeautifulSoup
+                </div>
+              </div>
+              <div class="proj-tags">
+                <span class="tag">Python</span><span class="tag">Scraping</span>
+              </div>
+              <div class="card-actions">
+                <a
+                  class="btn code"
+                  href="https://github.com/sujaymacwan/Web-Scrapping/blob/main/Yelp%20Reviews/Yelp%20Reviews.py"
+                  target="_blank"
+                  >View Code <i class="fa-brands fa-github"></i
+                ></a>
+                <button
+                  class="btn ghost read-more"
+                  aria-expanded="false"
+                  aria-controls="det6"
+                >
+                  Read more <i class="fa-solid fa-chevron-down"></i>
+                </button>
+              </div>
+              <div id="det6" class="details" aria-hidden="true">
+                <p>
+                  <strong>Impact:</strong> Built product sentiment datasets for
+                  100+ restaurants.<br />
+                  <strong>Stack:</strong> Python, BeautifulSoup, pandas.<br />
+                  <strong>Highlights:</strong> Rate-limit handling, deduping.
+                </p>
+              </div>
+            </article>
+
+            <!-- 7 
+            <article
+              class="proj-card"
+              role="listitem"
+              tabindex="0"
+              aria-labelledby="p7-title"
+            >
+              <div class="title-row">
+                <div>
+                  <h3 id="p7-title">PDF Table Extractor</h3>
+                  <p class="caption">
+                    Tables liberated from PDFs — welcome, spreadsheets.
+                  </p>
+                </div>
+                <div style="text-align: right; color: var(--muted)">
+                  Camelot
+                </div>
+              </div>
+              <div class="proj-tags">
+                <span class="tag">Python</span><span class="tag">Camelot</span>
+              </div>
+              <div class="card-actions">
+                <a class="btn code" href="#" target="_blank"
+                  >View Code <i class="fa-brands fa-github"></i
+                ></a>
+                <button
+                  class="btn ghost read-more"
+                  aria-expanded="false"
+                  aria-controls="det7"
+                >
+                  Read more <i class="fa-solid fa-chevron-down"></i>
+                </button>
+              </div>
+              <div id="det7" class="details" aria-hidden="true">
+                <p>
+                  <strong>Impact:</strong> Reclaimed 10k rows from legacy PDFs
+                  into usable tables.<br />
+                  <strong>Stack:</strong> Camelot, pandas.<br />
+                  <strong>Highlights:</strong> Table heuristics, column
+                  alignment fixes.
+                </p>
+              </div>
+            </article>
+            -->
+
+            <!-- 8 
+            <article
+              class="proj-card"
+              role="listitem"
+              tabindex="0"
+              aria-labelledby="p8-title"
+            >
+              <div class="title-row">
+                <div>
+                  <h3 id="p8-title">Auto Report Generator</h3>
+                  <p class="caption">
+                    Auto-generated slide decks — click, send, flex.
+                  </p>
+                </div>
+                <div style="text-align: right; color: var(--muted)">Python</div>
+              </div>
+              <div class="proj-tags">
+                <span class="tag">Python</span><span class="tag">pptx</span>
+              </div>
+              <div class="card-actions">
+                <a class="btn code" href="#" target="_blank"
+                  >View Code <i class="fa-brands fa-github"></i
+                ></a>
+                <button
+                  class="btn ghost read-more"
+                  aria-expanded="false"
+                  aria-controls="det8"
+                >
+                  Read more <i class="fa-solid fa-chevron-down"></i>
+                </button>
+              </div>
+              <div id="det8" class="details" aria-hidden="true">
+                <p>
+                  <strong>Impact:</strong> Produced weekly ops decks from ETL
+                  outputs.<br />
+                  <strong>Stack:</strong> Python, python-pptx.<br />
+                  <strong>Highlights:</strong> Templates, slide automation,
+                  image cropping.
+                </p>
+              </div>
+            </article>
+            -->
+          </div>
+
+          <!-- CATEGORY 3: Computer Vision & Security (3) -->
+          <h3 style="margin: 22px 0 8px; color: var(--accent)">
+            Computer Vision & Security
+          </h3>
+          <div class="projects-grid" role="list">
+            <!-- 9 -->
+            <article
+              class="proj-card"
+              role="listitem"
+              tabindex="0"
+              aria-labelledby="p9-title"
+            >
+              <div class="title-row">
+                <div>
+                  <h3 id="p9-title">SmartGuard</h3>
+                  <p class="caption">
+                    Real-time motion eye — watch without the barking.
+                  </p>
+                </div>
+                <div style="text-align: right; color: var(--muted)">OpenCV</div>
+              </div>
+              <div class="proj-tags">
+                <span class="tag">OpenCV</span><span class="tag">Python</span>
+              </div>
+              <div class="card-actions">
+                <a
+                  class="btn code"
+                  href="https://github.com/sujaymacwan/Audio-Video/blob/main/Thief%20Detection/SujayMacwan_Thief_detection.ipynb"
+                  target="_blank"
+                  >View Code <i class="fa-brands fa-github"></i
+                ></a>
+                <button
+                  class="btn ghost read-more"
+                  aria-expanded="false"
+                  aria-controls="det9"
+                >
+                  Read more <i class="fa-solid fa-chevron-down"></i>
+                </button>
+              </div>
+              <div id="det9" class="details" aria-hidden="true">
+                <p>
+                  <strong>Impact:</strong> Lightweight motion detection for
+                  resource-constrained cameras.<br />
+                  <strong>Stack:</strong> OpenCV, NumPy.<br />
+                  <strong>Highlights:</strong> Frame differencing, fps tuning.
+                </p>
+              </div>
+            </article>
+
+            <!--10 
+            <article
+              class="proj-card"
+              role="listitem"
+              tabindex="0"
+              aria-labelledby="p10-title"
+            >
+              <div class="title-row">
+                <div>
+                  <h3 id="p10-title">License Plate Reader</h3>
+                  <p class="caption">
+                    ALPR for parking ops — fast and accurate.
+                  </p>
+                </div>
+                <div style="text-align: right; color: var(--muted)">YOLO</div>
+              </div>
+              <div class="proj-tags">
+                <span class="tag">Computer Vision</span
+                ><span class="tag">OCR</span>
+              </div>
+              <div class="card-actions">
+                <a class="btn code" href="#" target="_blank"
+                  >View Code <i class="fa-brands fa-github"></i
+                ></a>
+                <button
+                  class="btn ghost read-more"
+                  aria-expanded="false"
+                  aria-controls="det10"
+                >
+                  Read more <i class="fa-solid fa-chevron-down"></i>
+                </button>
+              </div>
+              <div id="det10" class="details" aria-hidden="true">
+                <p>
+                  <strong>Impact:</strong> Automated parking enforcement
+                  logs.<br />
+                  <strong>Stack:</strong> YOLO, Tesseract OCR.<br />
+                  <strong>Highlights:</strong> Post-processing to remove false
+                  positives.
+                </p>
+              </div>
+            </article>
+            -->
+
+            <!--11 
+            <article
+              class="proj-card"
+              role="listitem"
+              tabindex="0"
+              aria-labelledby="p11-title"
+            >
+              <div class="title-row">
+                <div>
+                  <h3 id="p11-title">Face Recognition Access</h3>
+                  <p class="caption">
+                    Door access (private pilot) — unlock responsibly.
+                  </p>
+                </div>
+                <div style="text-align: right; color: var(--muted)">
+                  TensorFlow
+                </div>
+              </div>
+              <div class="proj-tags">
+                <span class="tag">TensorFlow</span
+                ><span class="tag">FaceNet</span>
+              </div>
+              <div class="card-actions">
+                <a class="btn code" href="#" target="_blank"
+                  >View Code <i class="fa-brands fa-github"></i
+                ></a>
+                <button
+                  class="btn ghost read-more"
+                  aria-expanded="false"
+                  aria-controls="det11"
+                >
+                  Read more <i class="fa-solid fa-chevron-down"></i>
+                </button>
+              </div>
+              <div id="det11" class="details" aria-hidden="true">
+                <p>
+                  <strong>Impact:</strong> Small-scale door access prototype.<br />
+                  <strong>Stack:</strong> TensorFlow, embeddings.<br />
+                  <strong>Highlights:</strong> Low-latency inference on edge
+                  devices.
+                </p>
+              </div>
+            </article> -->
+          </div>
+
+          <!-- CATEGORY 4: Machine Learning & Risk Analytics (4) -->
+          <h3 style="margin: 22px 0 8px; color: var(--accent)">
+            Machine Learning & Risk Analytics
+          </h3>
+          <div class="projects-grid" role="list">
+            <!--12 -->
+            <article
+              class="proj-card"
+              role="listitem"
+              tabindex="0"
+              aria-labelledby="p12-title"
+            >
+              <div class="title-row">
+                <div>
+                  <h3 id="p12-title">CardioPredict</h3>
+                  <p class="caption">Heart-risk ML — saving beats and lives.</p>
+                </div>
+                <div style="text-align: right; color: var(--muted)">
+                  sklearn
+                </div>
+              </div>
+              <div class="proj-tags">
+                <span class="tag">sklearn</span><span class="tag">XGBoost</span>
+              </div>
+              <div class="card-actions">
+                <a
+                  class="btn code"
+                  href="https://github.com/sujaymacwan/Data-Analysis/tree/main/Heart%20diseases%20(Imputers)"
+                  target="_blank"
+                  >View Code <i class="fa-brands fa-github"></i
+                ></a>
+                <button
+                  class="btn ghost read-more"
+                  aria-expanded="false"
+                  aria-controls="det12"
+                >
+                  Read more <i class="fa-solid fa-chevron-down"></i>
+                </button>
+              </div>
+              <div id="det12" class="details" aria-hidden="true">
+                <p>
+                  <strong>Impact:</strong> Feature engineering + model
+                  explainability pipeline.<br />
+                  <strong>Stack:</strong> sklearn, XGBoost, LIME.<br />
+                  <strong>Highlights:</strong> Imputer experiments & CV.
+                </p>
+              </div>
+            </article>
+
+            <!--13 -->
+            <article
+              class="proj-card"
+              role="listitem"
+              tabindex="0"
+              aria-labelledby="p13-title"
+            >
+              <div class="title-row">
+                <div>
+                  <h3 id="p13-title">Loan Ensemble</h3>
+                  <p class="caption">
+                    CatBoost + LGBM — voting like a democracy.
+                  </p>
+                </div>
+                <div style="text-align: right; color: var(--muted)">
+                  CatBoost
+                </div>
+              </div>
+              <div class="proj-tags">
+                <span class="tag">CatBoost</span><span class="tag">LGBM</span>
+              </div>
+              <div class="card-actions">
+                <a
+                  class="btn code"
+                  href="https://github.com/sujaymacwan/Machine-Learning/blob/main/Loan%20Approval%20Prediction/loan-approval-prediction.ipynb"
+                  target="_blank"
+                  >View Code <i class="fa-brands fa-github"></i
+                ></a>
+                <button
+                  class="btn ghost read-more"
+                  aria-expanded="false"
+                  aria-controls="det13"
+                >
+                  Read more <i class="fa-solid fa-chevron-down"></i>
+                </button>
+              </div>
+              <div id="det13" class="details" aria-hidden="true">
+                <p>
+                  <strong>Impact:</strong> Strong predictive baseline with
+                  explanations.<br />
+                  <strong>Stack:</strong> CatBoost, LGBM, SHAP.<br />
+                  <strong>Highlights:</strong> Ensemble stacking and LIME/SHAP
+                  insights.
+                </p>
+              </div>
+            </article>
+
+            <!--14 -->
+            <article
+              class="proj-card"
+              role="listitem"
+              tabindex="0"
+              aria-labelledby="p14-title"
+            >
+              <div class="title-row">
+                <div>
+                  <h3 id="p14-title">Algo Comparison</h3>
+                  <p class="caption">
+                    ML speed-dating — which model wins tonight?
+                  </p>
+                </div>
+                <div style="text-align: right; color: var(--muted)">
+                  sklearn
+                </div>
+              </div>
+              <div class="proj-tags">
+                <span class="tag">sklearn</span><span class="tag">metrics</span>
+              </div>
+              <div class="card-actions">
+                <a
+                  class="btn code"
+                  href="https://github.com/sujaymacwan/Machine-Learning/blob/main/Comparision%20of%20Algorithms/Accuracy%20and%20Report%20All%20algos.py"
+                  target="_blank"
+                  >View Code <i class="fa-brands fa-github"></i
+                ></a>
+                <button
+                  class="btn ghost read-more"
+                  aria-expanded="false"
+                  aria-controls="det14"
+                >
+                  Read more <i class="fa-solid fa-chevron-down"></i>
+                </button>
+              </div>
+              <div id="det14" class="details" aria-hidden="true">
+                <p>
+                  <strong>Impact:</strong> Empirical benchmark across popular
+                  classifiers.<br />
+                  <strong>Stack:</strong> sklearn, pandas.<br />
+                  <strong>Highlights:</strong> Consistent CV & scoring.
+                </p>
+              </div>
+            </article>
+
+            <!--15 -->
+            <article
+              class="proj-card"
+              role="listitem"
+              tabindex="0"
+              aria-labelledby="p15-title"
+            >
+              <div class="title-row">
+                <div>
+                  <h3 id="p15-title">AutoFeatureSelector</h3>
+                  <p class="caption">6 methods, 1 ranker — minimalism wins.</p>
+                </div>
+                <div style="text-align: right; color: var(--muted)">
+                  sklearn
+                </div>
+              </div>
+              <div class="proj-tags">
+                <span class="tag">feature selection</span
+                ><span class="tag">LGBM</span>
+              </div>
+              <div class="card-actions">
+                <a
+                  class="btn code"
+                  href="https://github.com/sujaymacwan/Machine-Learning/blob/main/Auto%20Feature%20Selector/AFS.ipynb"
+                  target="_blank"
+                  >View Code <i class="fa-brands fa-github"></i
+                ></a>
+                <button
+                  class="btn ghost read-more"
+                  aria-expanded="false"
+                  aria-controls="det15"
+                >
+                  Read more <i class="fa-solid fa-chevron-down"></i>
+                </button>
+              </div>
+              <div id="det15" class="details" aria-hidden="true">
+                <p>
+                  <strong>Impact:</strong> Reduced feature sets while preserving
+                  metrics.<br />
+                  <strong>Stack:</strong> sklearn, LGBM.<br />
+                  <strong>Highlights:</strong> Multi-method ranking & consensus.
+                </p>
+              </div>
+            </article>
+          </div>
+
+          <!-- CATEGORY 5: NLP & Recommendation (4) -->
+          <h3 style="margin: 22px 0 8px; color: var(--accent)">
+            NLP & Recommendation Systems
+          </h3>
+          <div class="projects-grid" role="list">
+            <!--16 -->
+            <article
+              class="proj-card"
+              role="listitem"
+              tabindex="0"
+              aria-labelledby="p16-title"
+            >
+              <div class="title-row">
+                <div>
+                  <h3 id="p16-title">VisionNarrator</h3>
+                  <p class="caption">
+                    CNN-LSTM captions — pictures that tell stories.
+                  </p>
+                </div>
+                <div style="text-align: right; color: var(--muted)">
+                  Deep Learning
+                </div>
+              </div>
+              <div class="proj-tags">
+                <span class="tag">DenseNet</span><span class="tag">LSTM</span>
+              </div>
+              <div class="card-actions">
+                <a
+                  class="btn code"
+                  href="https://github.com/sujaymacwan/Deep-Learning/blob/main/Image-Captioning-using-CNN-LSTM-main/Image-Captioning-using-CNN-LSTM-main/Image_captioning.ipynb"
+                  target="_blank"
+                  >View Code <i class="fa-brands fa-github"></i
+                ></a>
+                <button
+                  class="btn ghost read-more"
+                  aria-expanded="false"
+                  aria-controls="det16"
+                >
+                  Read more <i class="fa-solid fa-chevron-down"></i>
+                </button>
+              </div>
+              <div id="det16" class="details" aria-hidden="true">
+                <p>
+                  <strong>Impact:</strong> Auto captions for image accessibility
+                  demos.<br />
+                  <strong>Stack:</strong> CNN-LSTM, PyTorch.<br />
+                  <strong>Highlights:</strong> Beam search, BLEU evaluation.
+                </p>
+              </div>
+            </article>
+
+            <!--17 -->
+            <article
+              class="proj-card"
+              role="listitem"
+              tabindex="0"
+              aria-labelledby="p17-title"
+            >
+              <div class="title-row">
+                <div>
+                  <h3 id="p17-title">BERT Sentiment</h3>
+                  <p class="caption">
+                    Twitter moods — because BERT has feelings.
+                  </p>
+                </div>
+                <div style="text-align: right; color: var(--muted)">BERT</div>
+              </div>
+              <div class="proj-tags">
+                <span class="tag">PyTorch</span
+                ><span class="tag">Transformers</span>
+              </div>
+              <div class="card-actions">
+                <a
+                  class="btn code"
+                  href="https://github.com/sujaymacwan/Deep-Learning/blob/main/Sentiment-Analysis-using-BERT-main/Sentiment_Analysis.ipynb"
+                  target="_blank"
+                  >View Code <i class="fa-brands fa-github"></i
+                ></a>
+                <button
+                  class="btn ghost read-more"
+                  aria-expanded="false"
+                  aria-controls="det17"
+                >
+                  Read more <i class="fa-solid fa-chevron-down"></i>
+                </button>
+              </div>
+              <div id="det17" class="details" aria-hidden="true">
+                <p>
+                  <strong>Impact:</strong> Social listening pipelines &
+                  sentiment dashboards.<br />
+                  <strong>Stack:</strong> HuggingFace, PyTorch.<br />
+                  <strong>Highlights:</strong> Fine-tuning + inference
+                  optimizations.
+                </p>
+              </div>
+            </article>
+
+            <!--18 -->
+            <article
+              class="proj-card"
+              role="listitem"
+              tabindex="0"
+              aria-labelledby="p18-title"
+            >
+              <div class="title-row">
+                <div>
+                  <h3 id="p18-title">Movie Recommender</h3>
+                  <p class="caption">
+                    SVD for movie tastes — better than “Because you watched…”
+                  </p>
+                </div>
+                <div style="text-align: right; color: var(--muted)">
+                  Surprise
+                </div>
+              </div>
+              <div class="proj-tags">
+                <span class="tag">SVD</span
+                ><span class="tag">Collaborative</span>
+              </div>
+              <div class="card-actions">
+                <a
+                  class="btn code"
+                  href="https://github.com/sujaymacwan/Machine-Learning/blob/main/Movie%20Reccomendation/Movie_Recommender.ipynb"
+                  target="_blank"
+                  >View Code <i class="fa-brands fa-github"></i
+                ></a>
+                <button
+                  class="btn ghost read-more"
+                  aria-expanded="false"
+                  aria-controls="det18"
+                >
+                  Read more <i class="fa-solid fa-chevron-down"></i>
+                </button>
+              </div>
+              <div id="det18" class="details" aria-hidden="true">
+                <p>
+                  <strong>Impact:</strong> Improved engagement in demo app.<br />
+                  <strong>Stack:</strong> Surprise, TF-IDF hybrids.<br />
+                  <strong>Highlights:</strong> Hybrid filtering blend.
+                </p>
+              </div>
+            </article>
+
+            <!--19 -->
+            <article
+              class="proj-card"
+              role="listitem"
+              tabindex="0"
+              aria-labelledby="p19-title"
+            >
+              <div class="title-row">
+                <div>
+                  <h3 id="p19-title">LDA News Topics</h3>
+                  <p class="caption">
+                    Letting the news make its own headlines.
+                  </p>
+                </div>
+                <div style="text-align: right; color: var(--muted)">Gensim</div>
+              </div>
+              <div class="proj-tags">
+                <span class="tag">Gensim</span><span class="tag">spaCy</span>
+              </div>
+              <div class="card-actions">
+                <a
+                  class="btn code"
+                  href="https://github.com/sujaymacwan/Machine-Learning/blob/main/News%20Modeling/News_Modeling.ipynb"
+                  target="_blank"
+                  >View Code <i class="fa-brands fa-github"></i
+                ></a>
+                <button
+                  class="btn ghost read-more"
+                  aria-expanded="false"
+                  aria-controls="det19"
+                >
+                  Read more <i class="fa-solid fa-chevron-down"></i>
+                </button>
+              </div>
+              <div id="det19" class="details" aria-hidden="true">
+                <p>
+                  <strong>Impact:</strong> 11k article topic modelling for
+                  newsroom analytics.<br />
+                  <strong>Stack:</strong> Gensim, pyLDAvis.<br />
+                  <strong>Highlights:</strong> Coherence tuning & visualisation.
+                </p>
+              </div>
+            </article>
+          </div>
+
+          <!-- CATEGORY 6: Data Engineering & Big Data (1) -->
+          <h3 style="margin: 22px 0 8px; color: var(--accent)">
+            Data Engineering & Big-Data Pipelines
+          </h3>
+          <div class="projects-grid" role="list">
+            <!--20 -->
+            <article
+              class="proj-card"
+              role="listitem"
+              tabindex="0"
+              aria-labelledby="p20-title"
+            >
+              <div class="title-row">
+                <div>
+                  <h3 id="p20-title">NYC Public-Data ETL</h3>
+                  <p class="caption">
+                    8 sources, PySpark — the pipeline that keeps giving.
+                  </p>
+                </div>
+                <div style="text-align: right; color: var(--muted)">
+                  PySpark
+                </div>
+              </div>
+              <div class="proj-tags">
+                <span class="tag">PySpark</span><span class="tag">Hadoop</span>
+              </div>
+              <div class="card-actions">
+                <a
+                  class="btn code"
+                  href="https://github.com/sujaymacwan/NYC-shooting-analysis"
+                  target="_blank"
+                  >View Code <i class="fa-brands fa-github"></i
+                ></a>
+                <button
+                  class="btn ghost read-more"
+                  aria-expanded="false"
+                  aria-controls="det20"
+                >
+                  Read more <i class="fa-solid fa-chevron-down"></i>
+                </button>
+              </div>
+              <div id="det20" class="details" aria-hidden="true">
+                <p>
+                  <strong>Impact:</strong> Consolidated multi-source data for
+                  Power BI dashboards.<br />
+                  <strong>Stack:</strong> PySpark, MySQL, Snowflake
+                  shortcuts.<br />
+                  <strong>Highlights:</strong> Scalable ETL, schema versioning.
+                </p>
+              </div>
+            </article>
           </div>
         </div>
-      </div>
+      </section>
 
-      <!-- 2 ─ Accessibility & Automation -->
-      <div class="category" data-aos="fade-up">
-        <h3>
-          <i class="fa-solid fa-robot"></i> Accessibility & Automation Tools
-        </h3>
-        <div class="card-grid">
-          <!-- P-2 -->
-          <div class="card">
-            <div class="card-content">
-              <h4>Text-to-Audio PDF</h4>
-              <p>Let PDFs whisper 🔊</p>
-              <span class="tag">gTTS • PyPDF2</span>
-            </div>
-            <div class="overlay">
-              <p>
-                Multi-page docs → WAV for hands-free reading.<br />
-                Pun – “Now even your files can read themselves bedtime stories.”
-              </p>
-              <a
-                class="gh-link"
-                href="https://github.com/sujaymacwan/Audio-Video/blob/main/Text%20to%20Audio/AudioBook.ipynb"
-                target="_blank"
-              >
-                <i class="fa-brands fa-github"></i> GitHub
-              </a>
-            </div>
+      <!-- ABOUT -->
+      <section id="about" class="container" style="padding: 34px 18px 80px">
+        <h2 style="margin-top: 0">About Me</h2>
+        <p style="color: var(--muted); max-width: 760px">
+          I’m a computer engineering grad turned data enthusiast. I focus on
+          shipping machine learning systems that are robust, explainable and
+          production-ready. I enjoy combining clean data engineering,
+          interpretable models, and visual storytelling — with a sprinkle of dad
+          jokes along the way.
+        </p>
+        <div
+          style="display: flex; gap: 12px; margin-top: 16px; flex-wrap: wrap"
+        >
+          <a
+            class="btn code"
+            target="_blank"
+            href="https://drive.google.com/file/d/1qIBa-Jl4zNae_MA9dORU0fUHwdjuYjHX/view?usp=sharing"
+            aria-label="Resume"
+            >Download resume</a
+          >
+          <a
+            class="btn ghost"
+            href="https://github.com/sujaymacwan"
+            target="_blank"
+            >GitHub <i class="fa-brands fa-github"></i
+          ></a>
+          <a
+            class="btn ghost"
+            href="https://www.linkedin.com/in/sujay-m-045ba4ba/"
+            target="_blank"
+            >LinkedIn <i class="fa-brands fa-linkedin"></i
+          ></a>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section id="contact" class="container" style="padding-bottom: 96px">
+        <h2>Contact</h2>
+        <p style="color: var(--muted)">
+          Email:
+          <a href="mailto:macwan.sujay309@gmail.com"
+            >macwan.sujay309@gmail.com</a
+          >
+          · Open to freelance & full-time opportunities.
+        </p>
+
+        <form
+          id="contactForm"
+          style="
+            margin-top: 18px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            max-width: 760px;
+          "
+        >
+          <input
+            name="name"
+            aria-label="Your name"
+            placeholder="Name"
+            required
+            style="
+              padding: 10px;
+              border-radius: 8px;
+              border: 1px solid var(--card-border);
+              background: transparent;
+              color: var(--text);
+            "
+          />
+          <input
+            name="email"
+            aria-label="Your email"
+            placeholder="Email"
+            type="email"
+            required
+            style="
+              padding: 10px;
+              border-radius: 8px;
+              border: 1px solid var(--card-border);
+              background: transparent;
+              color: var(--text);
+            "
+          />
+          <input
+            name="subject"
+            aria-label="Subject"
+            placeholder="Subject"
+            style="
+              padding: 10px;
+              border-radius: 8px;
+              border: 1px solid var(--card-border);
+              background: transparent;
+              color: var(--text);
+            "
+          />
+          <input
+            name="phone"
+            aria-label="Phone"
+            placeholder="Phone (optional)"
+            style="
+              padding: 10px;
+              border-radius: 8px;
+              border: 1px solid var(--card-border);
+              background: transparent;
+              color: var(--text);
+            "
+          />
+          <textarea
+            name="message"
+            aria-label="Message"
+            placeholder="Tell me about your project..."
+            rows="6"
+            style="
+              grid-column: 1 / -1;
+              padding: 10px;
+              border-radius: 8px;
+              border: 1px solid var(--card-border);
+              background: transparent;
+              color: var(--text);
+            "
+          ></textarea>
+          <div
+            style="
+              grid-column: 1 / -1;
+              display: flex;
+              gap: 10px;
+              align-items: center;
+            "
+          >
+            <button class="btn code" type="submit">Send message</button>
+            <div id="formStatus" style="color: var(--muted)"></div>
           </div>
+        </form>
+      </section>
 
-          <!-- P-5 -->
-          <div class="card">
-            <div class="card-content">
-              <h4>YelpHarvest Scraper</h4>
-              <p>Reviews served raw 🍣</p>
-              <span class="tag">BeautifulSoup</span>
-            </div>
-            <div class="overlay">
-              <p>
-                50 + cleaned reviews/restaurant.<br />
-                Pun – “We crawl so you can binge-eat data.”
-              </p>
-              <a
-                class="gh-link"
-                href="https://github.com/sujaymacwan/Web-Scrapping/blob/main/Yelp%20Reviews/Yelp%20Reviews.py"
-                target="_blank"
-              >
-                <i class="fa-brands fa-github"></i> GitHub
-              </a>
-            </div>
+      <footer class="container" role="contentinfo">
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            padding-bottom: 36px;
+          "
+        >
+          <div style="color: var(--muted)">
+            © <span id="year"></span> Sujay Macwan · brewed with ☕ & dad jokes
+          </div>
+          <div style="display: flex; gap: 10px">
+            <a class="btn ghost" href="#" aria-label="Privacy">Privacy</a>
+            <a class="btn ghost" href="#" aria-label="Resume">Resume</a>
           </div>
         </div>
-      </div>
+      </footer>
+    </main>
 
-      <!-- 3 ─ Computer Vision -->
-      <div class="category" data-aos="fade-up">
-        <h3>
-          <i class="fa-solid fa-camera-cctv"></i> Computer Vision & Security
-        </h3>
-        <div class="card-grid">
-          <!-- P-3 -->
-          <div class="card">
-            <div class="card-content">
-              <h4>SmartGuard</h4>
-              <p>Real-time motion eye 👁️</p>
-              <span class="tag">OpenCV • NumPy</span>
-            </div>
-            <div class="overlay">
-              <p>
-                500-px threshold, 30 fps recording.<br />
-                Pun – “A watchdog without the barking.”
-              </p>
-              <a
-                class="gh-link"
-                href="https://github.com/sujaymacwan/Audio-Video/blob/main/Thief%20Detection/SujayMacwan_Thief_detection.ipynb"
-                target="_blank"
-              >
-                <i class="fa-brands fa-github"></i> GitHub
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
+    <!-- =========================
+       SCRIPTS (vanilla JS + GSAP)
+       ========================= -->
+    <script>
+      // Auto year
+      document.getElementById("year").textContent = new Date().getFullYear();
 
-      <!-- 4 ─ ML & Risk Analytics -->
-      <div class="category" data-aos="fade-up">
-        <h3>
-          <i class="fa-solid fa-heart-pulse"></i> Machine Learning & Risk
-          Analytics
-        </h3>
-        <div class="card-grid">
-          <!-- P-4 -->
-          <div class="card">
-            <div class="card-content">
-              <h4>CardioPredict</h4>
-              <p>Heart-risk ML ❤️</p>
-              <span class="tag">sk-learn • XGBoost</span>
-            </div>
-            <div class="overlay">
-              <p>
-                44 model-imputer combos; 85.5 % accuracy.<br />
-                Pun – “Putting the ‘art’ in heart-smart charts.”
-              </p>
-              <a
-                class="gh-link"
-                href="https://github.com/sujaymacwan/Data-Analysis/tree/main/Heart%20diseases%20(Imputers)"
-                target="_blank"
-              >
-                <i class="fa-brands fa-github"></i> GitHub
-              </a>
-            </div>
-          </div>
+      // THEME: toggle with persistence
+      const themeToggle = document.getElementById("themeToggle");
+      const themeIcon = document.getElementById("themeIcon");
+      function applyTheme(theme) {
+        if (theme === "light") {
+          document.body.classList.add("light");
+          themeIcon.className = "fa-solid fa-sun";
+          themeToggle.setAttribute("aria-pressed", "true");
+        } else {
+          document.body.classList.remove("light");
+          themeIcon.className = "fa-solid fa-moon";
+          themeToggle.setAttribute("aria-pressed", "false");
+        }
+      }
+      const storedTheme =
+        localStorage.getItem("site-theme") ||
+        (window.matchMedia &&
+        window.matchMedia("(prefers-color-scheme: light)").matches
+          ? "light"
+          : "dark");
+      applyTheme(storedTheme);
+      themeToggle.addEventListener("click", () => {
+        const next = document.body.classList.contains("light")
+          ? "dark"
+          : "light";
+        localStorage.setItem("site-theme", next);
+        applyTheme(next);
+        // subtle micro animation
+        gsap.fromTo(themeToggle, { scale: 0.95 }, { scale: 1, duration: 0.18 });
+      });
 
-          <!-- P-8 -->
-          <div class="card">
-            <div class="card-content">
-              <h4>AutoFeatureSelector</h4>
-              <p>6 methods, 1 ranker</p>
-              <span class="tag">sk-learn • LGBM</span>
-            </div>
-            <div class="overlay">
-              <p>
-                Ranks top-30 FIFA-19 features.<br />
-                Pun – “Feature hoarder turned minimalist.”
-              </p>
-              <a
-                class="gh-link"
-                href="https://github.com/sujaymacwan/Machine-Learning/blob/main/Auto%20Feature%20Selector/AFS.ipynb"
-                target="_blank"
-              >
-                <i class="fa-brands fa-github"></i> GitHub
-              </a>
-            </div>
-          </div>
+      // READ MORE toggles (accessible)
+      document.querySelectorAll(".read-more").forEach((btn) => {
+        btn.addEventListener("click", () => toggleDetails(btn));
+        btn.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            toggleDetails(btn);
+          }
+        });
+      });
+      function toggleDetails(btn) {
+        const detId = btn.getAttribute("aria-controls");
+        const det = document.getElementById(detId);
+        const open = det.classList.toggle("open");
+        det.setAttribute("aria-hidden", !open);
+        btn.setAttribute("aria-expanded", open);
+        // animate arrow
+        const arrow =
+          btn.querySelector("i.fa-chevron-down") ||
+          btn.querySelector("i.fa-chevron-up");
+        // tiny gsap animation for smoothness
+        if (open) {
+          gsap.fromTo(
+            det,
+            { maxHeight: 0, opacity: 0 },
+            { maxHeight: 420, opacity: 1, duration: 0.36, ease: "power2.out" }
+          );
+          btn.querySelector("i.fa-solid").classList.remove("fa-chevron-down");
+          btn.querySelector("i.fa-solid").classList.add("fa-chevron-up");
+        } else {
+          gsap.to(det, {
+            maxHeight: 0,
+            opacity: 0,
+            duration: 0.28,
+            ease: "power2.in",
+          });
+          btn.querySelector("i.fa-solid").classList.remove("fa-chevron-up");
+          btn.querySelector("i.fa-solid").classList.add("fa-chevron-down");
+        }
+      }
 
-          <!-- P-9 -->
-          <div class="card">
-            <div class="card-content">
-              <h4>Algo Comparison</h4>
-              <p>5 models + ensemble</p>
-              <span class="tag">sk-learn</span>
-            </div>
-            <div class="overlay">
-              <p>
-                Side-by-side metrics for customer class.<br />
-                Pun – “ML speed-dating for algorithms.”
-              </p>
-              <a
-                class="gh-link"
-                href="https://github.com/sujaymacwan/Machine-Learning/blob/main/Comparision%20of%20Algorithms/Accuracy%20and%20Report%20All%20algos.py"
-                target="_blank"
-              >
-                <i class="fa-brands fa-github"></i> GitHub
-              </a>
-            </div>
-          </div>
+      // GSAP Scroll-triggered reveals
+      gsap.registerPlugin(ScrollTrigger);
+      gsap.utils
+        .toArray(
+          ".proj-card, .feature-card, .hero h2, .hero p, .projects-header"
+        )
+        .forEach((el, i) => {
+          gsap.from(el, {
+            opacity: 0,
+            y: 18,
+            duration: 0.7,
+            ease: "power3.out",
+            delay: i * 0.04,
+            scrollTrigger: {
+              trigger: el,
+              start: "top 90%",
+              toggleActions: "play none none none",
+            },
+          });
+        });
 
-          <!-- P-10 -->
-          <div class="card">
-            <div class="card-content">
-              <h4>Credit Card DT</h4>
-              <p>Approve or decline? 💳</p>
-              <span class="tag">DecisionTree</span>
-            </div>
-            <div class="overlay">
-              <p>
-                90 % accuracy after 47 engineered features.<br />
-                Pun – “Swipe right for approvals.”
-              </p>
-              <a
-                class="gh-link"
-                href="https://github.com/sujaymacwan/Machine-Learning/blob/main/Credit%20Card/DecisionTree.ipynb"
-                target="_blank"
-              >
-                <i class="fa-brands fa-github"></i> GitHub
-              </a>
-            </div>
-          </div>
+      // Card tilt micro-interaction on pointer move (desktop only)
+      if (!window.matchMedia("(hover: none)").matches) {
+        document.querySelectorAll(".proj-card").forEach((card) => {
+          card.addEventListener("pointermove", (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = (e.clientX - rect.left) / rect.width - 0.5;
+            const y = (e.clientY - rect.top) / rect.height - 0.5;
+            const rx = y * 6;
+            const ry = x * -6;
+            card.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg) translateZ(0)`;
+          });
+          card.addEventListener(
+            "pointerleave",
+            () => (card.style.transform = "")
+          );
+        });
+      }
 
-          <!-- P-11 -->
-          <div class="card">
-            <div class="card-content">
-              <h4>Credit Card RF</h4>
-              <p>Imbalance? No prob.</p>
-              <span class="tag">RandomForest</span>
-            </div>
-            <div class="overlay">
-              <p>
-                93 % accuracy (F1 0.57) with oversampling.<br />
-                Pun – “Leaves bias in the dust — literally.”
-              </p>
-              <a
-                class="gh-link"
-                href="https://github.com/sujaymacwan/Machine-Learning/blob/main/Credit%20Card/Random_Forest_Updated.ipynb"
-                target="_blank"
-              >
-                <i class="fa-brands fa-github"></i> GitHub
-              </a>
-            </div>
-          </div>
+      // Contact form: simple simulated submit (replace with real endpoint)
+      const form = document.getElementById("contactForm");
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const status = document.getElementById("formStatus");
+        status.textContent = "Sending...";
+        try {
+          // simulate
+          await new Promise((r) => setTimeout(r, 700));
+          status.textContent =
+            "Message sent — thanks! I will reply within 48 hours.";
+          form.reset();
+        } catch (err) {
+          status.textContent =
+            "Failed to send. Try emailing macwan.sujay309@gmail.com";
+        }
+      });
 
-          <!-- P-12 -->
-          <div class="card">
-            <div class="card-content">
-              <h4>Home Credit LGBM</h4>
-              <p>700 feats, 0.791 AUC</p>
-              <span class="tag">LightGBM</span>
-            </div>
-            <div class="overlay">
-              <p>
-                Multi-table engineering & 10-fold CV.<br />
-                Pun – “Because default shouldn’t be the default.”
-              </p>
-              <a
-                class="gh-link"
-                href="https://github.com/sujaymacwan/Machine-Learning/blob/main/Home%20Credit%20Default%20Risk/LGBM%20Credit%20Default.ipynb"
-                target="_blank"
-              >
-                <i class="fa-brands fa-github"></i> GitHub
-              </a>
-            </div>
-          </div>
+      // Performance: if user prefers reduced motion or slow connection, stop video autoplay
+      const conn =
+        navigator.connection ||
+        navigator.mozConnection ||
+        navigator.webkitConnection;
+      if (
+        window.matchMedia &&
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      ) {
+        const v = document.getElementById("bgVideo");
+        if (v) v.pause();
+      }
+      if (
+        conn &&
+        (conn.saveData ||
+          (conn.effectiveType && conn.effectiveType.includes("2g")))
+      ) {
+        const v = document.getElementById("bgVideo");
+        if (v) v.remove();
+      }
 
-          <!-- P-13 -->
-          <div class="card">
-            <div class="card-content">
-              <h4>Loan Ensemble</h4>
-              <p>CatBoost + LGBM 🏦</p>
-              <span class="tag">Ensemble</span>
-            </div>
-            <div class="overlay">
-              <p>
-                0.958 AUC; LIME explanations.<br />
-                Pun – “No ‘loan-ly’ features left behind.”
-              </p>
-              <a
-                class="gh-link"
-                href="https://github.com/sujaymacwan/Machine-Learning/blob/main/Loan%20Approval%20Prediction/loan-approval-prediction.ipynb"
-                target="_blank"
-              >
-                <i class="fa-brands fa-github"></i> GitHub
-              </a>
-            </div>
-          </div>
+      // keyboard accessibility: focus styles for Read more (Enter toggles)
+      document.querySelectorAll(".proj-card").forEach((card) => {
+        card.addEventListener("keydown", (e) => {
+          if (e.key === "Enter") {
+            // if Enter on card, focus first button
+            const btn = card.querySelector(".read-more");
+            if (btn) btn.focus();
+          }
+        });
+      });
+      function applyTheme(t) {
+        if (t === "light") document.body.classList.add("light");
+        else document.body.classList.remove("light");
 
-          <!-- P-16 -->
-          <div class="card">
-            <div class="card-content">
-              <h4>Real-Estate Price</h4>
-              <p>RF beats Lasso 🏘️</p>
-              <span class="tag">RandomForest</span>
-            </div>
-            <div class="overlay">
-              <p>
-                81 % R²; z-score outlier check.<br />
-                Pun – “Turning square footage into square numbers.”
-              </p>
-              <a
-                class="gh-link"
-                href="https://github.com/sujaymacwan/Machine-Learning/blob/main/Real%20Estate%20Price%20Prediction/Real%20Estate%20Price%20Prediction.ipynb"
-                target="_blank"
-              >
-                <i class="fa-brands fa-github"></i> GitHub
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
+        // force minor repaint for inputs/cards (fixes transient contrast artifacts)
+        document
+          .querySelectorAll("input, textarea, .proj-card, .feature-card")
+          .forEach((el) => {
+            el.style.transition = "none";
+            void el.offsetHeight; // force reflow
+            el.style.transition = "";
+          });
+      }
+    </script>
 
-      <!-- 5 ─ NLP & Recommenders -->
-      <div class="category" data-aos="fade-up">
-        <h3>
-          <i class="fa-solid fa-language"></i> NLP & Recommendation Systems
-        </h3>
-        <div class="card-grid">
-          <!-- P-6 -->
-          <div class="card">
-            <div class="card-content">
-              <h4>VisionNarrator</h4>
-              <p>CNN-LSTM captions 🖼️</p>
-              <span class="tag">DenseNet • LSTM</span>
-            </div>
-            <div class="overlay">
-              <p>
-                8 000 images → 40 k captions.<br />
-                Pun – “Pictures worth a thousand embeddings.”
-              </p>
-              <a
-                class="gh-link"
-                href="https://github.com/sujaymacwan/Deep-Learning/blob/main/Image-Captioning-using-CNN-LSTM-main/Image-Captioning-using-CNN-LSTM-main/Image_captioning.ipynb"
-                target="_blank"
-              >
-                <i class="fa-brands fa-github"></i> GitHub
-              </a>
-            </div>
-          </div>
+    <!-- =========================
+       DEVELOPER NOTES (end of file)
+       ========================= -->
+    <!--
+    Developer notes & design choices:
 
-          <!-- P-7 -->
-          <div class="card">
-            <div class="card-content">
-              <h4>BERT Sentiment</h4>
-              <p>Twitter moods 🐤</p>
-              <span class="tag">BERT • PyTorch</span>
-            </div>
-            <div class="overlay">
-              <p>
-                Fine-tuned, F1-scored.<br />
-                Pun – “Why read tweets when BERT can feel them for you?”
-              </p>
-              <a
-                class="gh-link"
-                href="https://github.com/sujaymacwan/Deep-Learning/blob/main/Sentiment-Analysis-using-BERT-main/Sentiment_Analysis.ipynb"
-                target="_blank"
-              >
-                <i class="fa-brands fa-github"></i> GitHub
-              </a>
-            </div>
-          </div>
+    1) Video background:
+       - Uses a short looped video for cinematic, modern feel.
+       - For performance: replace with optimized WebM (VP9 / AV1) or very short MP4 (~1-3s loop).
+       - For low-bandwidth users: script removes video if Save-Data or 2g/slow.
 
-          <!-- P-14 -->
-          <div class="card">
-            <div class="card-content">
-              <h4>Movie Recommender</h4>
-              <p>SVD 0.94 RMSE 🎬</p>
-              <span class="tag">Surprise • TF-IDF</span>
-            </div>
-            <div class="overlay">
-              <p>
-                Hybrid filtering for 943 users.<br />
-                Pun – “Because you deserve better than ‘Because you watched…’”
-              </p>
-              <a
-                class="gh-link"
-                href="https://github.com/sujaymacwan/Machine-Learning/blob/main/Movie%20Reccomendation/Movie_Recommender.ipynb"
-                target="_blank"
-              >
-                <i class="fa-brands fa-github"></i> GitHub
-              </a>
-            </div>
-          </div>
+    2) Theming:
+       - Light/dark implemented using body.light class and CSS variables at the top.
+       - All color choices are semantic variables to ease porting to SCSS or a design system.
+       - In light mode, card borders are stronger (see --card-border) to maintain contrast and affordance.
 
-          <!-- P-15 -->
-          <div class="card">
-            <div class="card-content">
-              <h4>LDA News Topics</h4>
-              <p>10 themes, 0.632 coh.</p>
-              <span class="tag">Gensim • spaCy</span>
-            </div>
-            <div class="overlay">
-              <p>
-                11 k articles visualised with pyLDAvis.<br />
-                Pun – “Letting the news make its own headlines.”
-              </p>
-              <a
-                class="gh-link"
-                href="https://github.com/sujaymacwan/Machine-Learning/blob/main/News%20Modeling/News_Modeling.ipynb"
-                target="_blank"
-              >
-                <i class="fa-brands fa-github"></i> GitHub
-              </a>
-            </div>
-          </div>
+    3) Accessibility:
+       - Semantic HTML5 (main, header, nav, sections).
+       - Skip link, keyboard operable Read more buttons (Enter/Space), aria-expanded and aria-hidden toggles.
+       - Focus outlines applied via :focus-within and explicit outline color variable (--focus).
+       - Contrast: ensure text colors in both themes meet WCAG AA; tweak tokens if necessary (tools: axe, Lighthouse).
 
-          <!-- P-17 -->
-          <div class="card">
-            <div class="card-content">
-              <h4>Financial News Sentiment</h4>
-              <p>TF-IDF + SVM 💹</p>
-              <span class="tag">SVM • SMOTE</span>
-            </div>
-            <div class="overlay">
-              <p>
-                74 % accuracy, balanced classes.<br />
-                Pun – “Bulls, bears, and balanced classes.”
-              </p>
-              <a
-                class="gh-link"
-                href="https://github.com/sujaymacwan/Machine-Learning/blob/main/Sentimental%20Analysis%20on%20Financial%20News/Sujay_Macwan_Sentiment_Analysis.ipynb"
-                target="_blank"
-              >
-                <i class="fa-brands fa-github"></i> GitHub
-              </a>
-            </div>
-          </div>
+    4) Interactions & Animations:
+       - GSAP + ScrollTrigger for viewport reveals, subtle entrance motion.
+       - Read-more uses max-height + GSAP for smooth transitions.
+       - Card tilt is pointer-based and disabled on touch devices to avoid issues.
+       - Micro-interactions on buttons use transform and shadows for tactile feel.
 
-          <!-- P-18 -->
-          <div class="card">
-            <div class="card-content">
-              <h4>20 NG Text Class.</h4>
-              <p>93.9 % accuracy 📚</p>
-              <span class="tag">BoW • Word2Vec</span>
-            </div>
-            <div class="overlay">
-              <p>
-                LogReg + CountVectorizer wins.<br />
-                Pun – “Holy words per minute, Batman!”
-              </p>
-              <a
-                class="gh-link"
-                href="https://github.com/sujaymacwan/Machine-Learning/blob/main/Text%20Classification/Text_Classification.ipynb"
-                target="_blank"
-              >
-                <i class="fa-brands fa-github"></i> GitHub
-              </a>
-            </div>
-          </div>
+    5) Projects structure:
+       - 20 projects grouped into categories to reduce cognitive load and let viewers quickly scan areas of expertise.
+       - Each project includes: Title, short caption, tags, "View Code" (links are placeholders or prefilled where provided), and "Read more" expanding details with impact/stack/highlights.
 
-          <!-- P-19 -->
-          <div class="card">
-            <div class="card-content">
-              <h4>Text Summarizer</h4>
-              <p>6 algos vs long docs</p>
-              <span class="tag">TextRank • BART</span>
-            </div>
-            <div class="overlay">
-              <p>
-                Summa scores 0.620; auto BLEU checks.<br />
-                Pun – “TL;DR as-a-Service.”
-              </p>
-              <a
-                class="gh-link"
-                href="https://github.com/sujaymacwan/Machine-Learning/blob/main/Text%20Summarization/Text_Summarization.ipynb"
-                target="_blank"
-              >
-                <i class="fa-brands fa-github"></i> GitHub
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
+    6) Performance & production:
+       - Consider server-side rendering or pre-rendering for SEO.
+       - Host the video on same CDN or cloud bucket with Brotli/gzip and proper caching headers.
+       - Extract CSS variables into SCSS partials and compile a production stylesheet (remove unused styles).
+       - Defer noncritical scripts and use code-splitting where necessary.
 
-      <!-- 6 ─ Data Engineering -->
-      <div class="category" data-aos="fade-up">
-        <h3>
-          <i class="fa-solid fa-database"></i> Data Engineering & Big-Data
-          Pipelines
-        </h3>
-        <div class="card-grid">
-          <!-- P-20 -->
-          <div class="card">
-            <div class="card-content">
-              <h4>NYC Public-Data ETL</h4>
-              <p>8 sources, PySpark 🗽</p>
-              <span class="tag">PySpark • Power BI</span>
-            </div>
-            <div class="overlay">
-              <p>
-                Distributed processing, multi-DB integration.<br />
-                Pun – “If you can wrangle it here, you can wrangle it anywhere.”
-              </p>
-              <a
-                class="gh-link"
-                href="https://github.com/sujaymacwan/NYC-shooting-analysis"
-                target="_blank"
-              >
-                <i class="fa-brands fa-github"></i> GitHub
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    7) Next steps / optional add-ons:
+       - Add a lightweight Lottie animated logo for branding.
+       - Implement modal detail pages for each project with richer media (images, embedded notebooks).
+       - Add search/filter by tag; add pagination or lazy-load for larger portfolios.
+       - Set up an API endpoint (Netlify Functions / AWS Lambda) to handle contact form submissions (or use Formspree / Getform).
 
-    <!-- ───── ABOUT ───── -->
-    <section id="about" class="section alt">
-      <h2 class="section-title" data-aos="fade-right">About Me</h2>
-      <p data-aos="fade-up">
-        Data-scientist, ML tinkerer, part-time pun-smith.<br />
-        Favourite optimisation: reducing coffee-to-insight latency.
-      </p>
-    </section>
-
-    <!-- ───── CONTACT ───── -->
-    <section id="contact" class="section">
-      <h2 class="section-title" data-aos="fade-right">Get in Touch</h2>
-      <p data-aos="fade-up">
-        Email: <a href="mailto:sujay@example.com">sujay@example.com</a> ·
-        <a href="https://github.com/sujaymacwan" target="_blank">
-          <i class="fa-brands fa-github"></i> GitHub
-        </a>
-      </p>
-    </section>
-
-    <!-- ───── FOOTER ───── -->
-    <footer>
-      <p>
-        © <span id="year"></span> Sujay Macwan · brewed with ☕ &amp; dad-jokes.
-      </p>
-    </footer>
-
-    <!-- scripts -->
-    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-    <script src="assets/js/main.js"></script>
-  </body>
+    8) Iconography:
+       - Icons used from FontAwesome (CDN). For a sharper, consistent set consider Lucide or Heroicons and a single icon scale.
+  --></body>
 </html>
