@@ -1950,6 +1950,34 @@
           });
       }
     </script>
+    <!-- EmailJS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <script>
+      // Initialize EmailJS with your PUBLIC KEY
+      emailjs.init("s76YyJ-_orBqEAR7n");
+
+      // Contact form handler
+      document
+        .getElementById("contactForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          const status = document.getElementById("formStatus");
+          status.textContent = "Sending...";
+
+          emailjs
+            .sendForm("service_8uqm1ug", "template_we0xruv", this)
+            .then(() => {
+              status.textContent = "Message sent — thanks!.";
+              this.reset();
+            })
+            .catch((error) => {
+              status.textContent =
+                "Failed to send. Please email me directly at macwan.sujay309@gmail.com.";
+              console.error("EmailJS Error:", error);
+            });
+        });
+    </script>
 
     <!-- =========================
        DEVELOPER NOTES (end of file)
